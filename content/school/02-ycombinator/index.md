@@ -1,7 +1,7 @@
 ---
 date: 2022-09-02
 title: Fellow
-company: Y Combinator (Startup School)
+school: Y Combinator (Startup School)
 location: Hanover, NH
 start: 06/22
 end: 09/22

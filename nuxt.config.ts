@@ -63,8 +63,8 @@ export default defineNuxtConfig({
     }],
   ],
   colorMode: {
-    preference: "one", // default value of $colorMode.preference
-    fallback: "one", // fallback value if not system preference found
+    preference: "light", // default value of $colorMode.preference
+    fallback: "light", // fallback value if not system preference found
   },
   
   router: { },
@@ -79,30 +79,8 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    documentDriven: {
-      // Will fetch navigation, page and surround.
-      navigation: true,
-      page: true,
-      surround: true,
-
-      // Will inject `[...slug].vue` as the root page.
-      injectPage: true,
-      trailingSlash: true,
-    },
-    markdown: { },
-    highlight: {
-      theme: "github-dark",
-      preload: [
-        "bash",
-        "c",
-        "cpp",
-        "java",
-        "julia",
-        "python",
-        "haskell",
-        "f#",
-        "vue",
-      ],
+    experimental: {
+      nativeSqlite: false,
     },
   },
 

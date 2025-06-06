@@ -39,14 +39,13 @@
 <script lang="ts" setup>
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const { data: contact } = await useAsyncData(
   "personal-contact",
   async () => {
-    const _contactData = await queryContent<MarkdownParsedContent>()
-      .where({ category: "contact" })
-      .findOne()
+    const _contactData = await queryCollection("contact")
+      .first()
     return _contactData
   },
 )

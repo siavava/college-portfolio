@@ -56,9 +56,9 @@
 <script setup lang="ts">
 // @ts-ignore
 // eslint-disable-next-line
-import markdownParser from "@nuxt/content/transformers/markdown"
+import { parseMarkdown } from "#imports"
 
-const parsedMarkdown = await markdownParser.parse(
+const parsedMarkdown = await parseMarkdown(
   "footer-comment",
   `I’m reciting that **quality affects all aspects of my pursuits**.
   I want to imbue quality in everything I do.

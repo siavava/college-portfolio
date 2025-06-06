@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:color";
 
 $color-modes: ("one", "two", "three");
 
@@ -14,15 +15,33 @@ $color-modes: ("one", "two", "three");
   }
 }
 
+@function channel-red($color) {
+  @return color.channel($color, "red", rgb);
+}
 
-$two-palette: (
+@function channel-green($color) {
+  @return color.channel($color, "green", rgb);
+}
 
-  "secondary-highlight": rgb(240, 191, 76),
+@function channel-blue($color) {
+  @return color.channel($color, "blue", rgb);
+}
+
+@function channel-alpha($color) {
+  @return color.alpha($color);
+}
+
+
+$light-palette: (
+
+  // "secondary-highlight": rgb(240, 191, 76),
+  "secondary-highlight": rgba(255, 88, 0, 1),
   // "primary-highlight": rgba(240, 191, 76, 0.7),
-  "primary-highlight": rgba(255, 246, 192, 0.7),
+  // "primary-highlight": rgba(255, 246, 192, 0.7),
+  "primary-highlight": rgba(255, 246, 192, 1),
 
   "info-background": rgb(247, 252, 255),
-  "info-foreground": rgba(red(#2d4f72), green(#2d4f72), blue(#2d4f72), 1),
+  "info-foreground": rgba(channel-red(#2d4f72), channel-green(#2d4f72), channel-blue(#2d4f72), 1),
 
   "success-background": rgb(245, 254, 250),
   "success-foreground": rgb(6, 78, 59),
@@ -38,16 +57,18 @@ $two-palette: (
 
   "text-highlight": #FFF6C0,
 
-  "background": #FFFFFF,
+  "background": #FCFCFC,
+  // "background": rgba(237, 237, 237, 1),
 
   "dark-background": #000000,
   "light-background": #2e2e2e,
   "lightest-background": #383838,
-  "fancy-background": lighten(#0a192f, 40%),
+  "fancy-background": color.scale(#0a192f, $lightness: 40%),
   "shadow": rgba(#000000, 0.1),
 
-  "dark-foreground": rgba(0, 0, 0, 0.2),
+  "dark-foreground": #000000,
 
+  // "foreground": rgba(0, 0, 0, 0.5),
   "foreground": rgba(0, 0, 0, 0.5),
 
   "light-foreground": #0D0E10,
@@ -56,10 +77,13 @@ $two-palette: (
   "border-color": rgba(0, 0, 0, 0.1)
 );
 
-$three-palette: (
+$dark-palette: (
 
   "primary-highlight": #E47E5C,
   // "primary-highlight": rgb(218, 241, 158),
+
+  "secondary-highlight": rgba(255, 53, 0, 1),
+  // "secondary-highlight": #E47E5C,
 
   "info-background": rgba(5, 95, 249, 0.1),
   "info-foreground": #7aade0,
@@ -74,16 +98,18 @@ $three-palette: (
 
   // "background": #111111,
   // "background": rgb(13, 13, 13, 1),
-  "background": rgba(0, 0, 0, 1),
+  // "background": rgba(0, 0, 0, 1),
+  "background": rgba(17, 17, 16, 1),
+  // "background": rgba(17, 17, 16, 1),
   // "background": rgb(19, 20, 25),
 
   "dark-background": #000000,
   "light-background": #232323,
   "lightest-background": #383838,
-  "fancy-background": lighten(#0a192f, 40%),
+  "fancy-background": color.adjust(#0a192f, $lightness: 40%),
   "shadow": rgba(#000000, 0.1),
 
-  "dark-foreground": rgba(255, 255, 255, 0.2),
+  "dark-foreground": #888888,
 
 
   // "foreground": rgba(232, 228, 229, 0.5),
@@ -95,58 +121,10 @@ $three-palette: (
   "border-color": rgba(255, 255, 255, 0.1)
 );
 
-$one-palette: (
-
-  "secondary-highlight": rgb(240, 191, 76),
-  "primary-highlight": rgba(240, 191, 76, 0.7),
-
-  "info-background": rgb(247, 252, 255),
-  "info-foreground": rgba(red(#2d4f72), green(#2d4f72), blue(#2d4f72), 1),
-
-  "success-background": rgb(245, 254, 250),
-  "success-foreground": rgb(6, 78, 59),
-
-  "error-background": rgb(255, 253, 245),
-  "error-foreground": rgb(120, 53, 15),
-  
-  "warning-background": rgb(253, 247, 247),
-  "warning-foreground": rgb(253, 50, 50),
-  
-  "critical-background": rgb(253, 247, 247),
-  "critical-foreground": rgb(255, 10, 10),
-  
-  "text-highlight": #FFF6C0,
-
-
-  "background": rgb(240, 244, 248),
-
-  "dark-background": #000000,
-  "light-background": #2e2e2e,
-  "lightest-background": #383838,
-  "fancy-background": lighten(#0a192f, 40%),
-  "shadow": rgba(#000000, 0.1),
-
-  "dark-foreground": rgba(0, 114, 149, 0.3),
-  "foreground": rgba(0, 114, 149, 1),
-  "light-foreground": rgba(0, 114, 149, 1),
-  "lightest-foreground": rgba(2, 49, 92, 1),
-
-  "border-color": rgba(0, 114, 149, 0.1)
-);
-
-
-
-
-@function color($color-name, $mode: "three") {
-  @if $mode == "one" {
-    @return map.get($one-palette, $color-name);
-  } @else if $mode == "two" {
-    @return map.get($two-palette, $color-name);
-  } @else if $mode == "three" {
-    @return map.get($three-palette, $color-name);
-  } @else if $mode == "four" {
-    @return map.get($four-palette, $color-name);
+@function color($color-name, $mode: "light") {
+  @if $mode == "dark" {
+    @return map.get($dark-palette, $color-name);
   } @else {
-    @return map.get($five-palette, $color-name);
+    @return map.get($dark-palette, $color-name);
   }
 }

@@ -41,7 +41,7 @@
               {{ project.title }}
             </span>
           </ProseH2>
-          <template v-if="hasCompany(project)">
+          <!-- <template v-if="hasCompany(project)">
             <span
               v-if="hasCompany(project)"
               class="project-company"
@@ -54,9 +54,9 @@
             >
               {{ project.company.name }}
             </NuxtLink>
-          </template>
+          </template> -->
           <div class="project-description">
-            <ContentDoc :value="project" />
+            <ContentRenderer :value="project" />
           </div>
         </div>
         <div class="project-footer">
@@ -125,11 +125,10 @@ const hasCompany = (project: any) => typeof project.company !== "undefined"
 const { data } = await useAsyncData(
   `projects-${useRoute().path}`,
   async () => {
-    const _projectsData = queryContent()
-      .where({ _path: { $regex: "^/projects" } })
-      .where({ featured: true })
-      .sort({ date: -1 })
-      .find()
+    const _projectsData = queryCollection("projects")
+      .where("featured", "=", "1")
+      .order("date", "DESC")
+      .all()
     return _projectsData
   },
 )

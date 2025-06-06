@@ -57,12 +57,8 @@
 const colorMode = useColorMode()
 
 const colorModes = [
-  "one",
-  "two",
-  "three",
-  // , "four"
-  // , "five"
-  // , "six"
+  "light",
+  "dark"
 ]
 
 const toggleColorMode = () => {

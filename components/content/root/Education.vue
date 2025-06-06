@@ -5,36 +5,36 @@
     </ProseH4>
     <div class="jobs-list">
       <div
-        v-for="job, i in jobs"
+        v-for="experience, i in experiences"
         :key="i"
         class="work-item"
       >
         <div class="range">
-          <span class="date">{{ job.start }}</span>
+          <span class="date">{{ experience.start }}</span>
           <span class="date"> &mdash; </span>
-          <span class="date"> {{ job.end }} </span>
+          <span class="date"> {{ experience.end }} </span>
         </div>
         <div class="work-info">
           <ProseH2>
             <ProseA
-              :href="job.url"
+              :href="experience.url"
               class="link"
               fancy
               bold
             >
               <span>
-                {{ job.title }}
+                {{ experience.title }}
                 <span class="company">
                   at
-                  {{ job.company }}
+                  {{ experience.school }}
                 </span>
               </span>
             </ProseA>
           </ProseH2>
 
-          <ContentDoc
+          <ContentRenderer
             class="jobs-doc"
-            :value="job"
+            :value="experience"
           />
         </div>
       </div>
@@ -45,23 +45,22 @@
 <script setup lang="ts">
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 // read 'job-info' data from Markdown files
-const { data: jobsData } = await useAsyncData(
+const { data: experiencesData } = await useAsyncData(
   `school-${useRoute().path}`,
   async () => {
-    const _jobsData = await queryContent<MarkdownParsedContent>()
-      .where({ category: "school-info" })
-      .sort({ date: -1 })
-      .find()
-    return _jobsData
+    const _expData = await queryCollection("education")
+      .order("date", "DESC")
+      .all()
+    return _expData
   },
 )
 
 // parse job info and store in an array, sorted by date
 // const jobs = Array<ParsedJobInfo>();
-const jobs = jobsData.value || []
+const experiences = experiencesData.value || []
 
 </script>
 

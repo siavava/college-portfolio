@@ -32,7 +32,7 @@
             </ProseA>
           </ProseH2>
 
-          <ContentDoc
+          <ContentRenderer
             class="jobs-doc"
             :value="job"
           />
@@ -43,18 +43,13 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
-
 // read 'job-info' data from Markdown files
 const { data: jobsData } = await useAsyncData(
   `jobs-${useRoute().path}`,
   async () => {
-    const _jobsData = await queryContent<MarkdownParsedContent>()
-      .where({ category: "jobs-info" })
-      .sort({ date: -1 })
-      .find()
+    const _jobsData = await queryCollection("jobs")
+      .order("date", "DESC")
+      .all()
     return _jobsData
   },
 )
@@ -62,7 +57,6 @@ const { data: jobsData } = await useAsyncData(
 // parse job info and store in an array, sorted by date
 // const jobs = Array<ParsedJobInfo>();
 const jobs = jobsData.value || []
-
 </script>
 
 <script lang="ts">

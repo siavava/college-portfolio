@@ -106,7 +106,7 @@
 <script lang="ts" setup>
 // close on click ourside
 import { onClickOutside } from "@vueuse/core"
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const menu = ref<HTMLElement | null>(null)
 const route = useRoute()
@@ -130,11 +130,9 @@ onMounted(() => {
 // read 'featured projects' data
 const { data } = await useAsyncData(
   async () => {
-    const _projectsData = queryContent<MarkdownParsedContent>()
-      .where({ _path: { $regex: "^/projects" } })
-      .sort({ date: -1 })
-      .only(["tag"])
-      .find()
+    const _projectsData = queryCollection("projects")
+      .order("date", "DESC")
+      .all()
     return _projectsData
   },
 )

@@ -1,7 +1,7 @@
 ---
 date: 2024-06-02
 title: Student
-company: Dartmouth College
+school: Dartmouth College
 location: Hanover, NH
 start: 09/20
 end: 06/24

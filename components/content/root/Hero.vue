@@ -3,12 +3,11 @@
     <div class="profile-info">
       <div class="profile-text">
         <div class="name">
-          <h1 v-for="name in profile.name">
-            {{ name }}
+          <h1>
+            {{ profile.name }}
           </h1>
         </div>
         <p
-          v-for="callout in profile.callout"
           class="hero-callout"
           v-html="callout" />
       </div>
@@ -19,17 +18,22 @@
 <script lang="ts" setup>
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const { data: profile } = await useAsyncData(
   async () => {
-    const _contactData = await queryContent<MarkdownParsedContent>()
-      .where({ category: "profile" })
-      .only(["name", "callout", "title", "company", "website"])
-      .findOne()
+    const _contactData = await queryCollection("profile")
+      .first()
     return _contactData
   },
 )
+
+const dropNewLines = (title: string) => title
+  .replace(/\\/gm, "?.?")
+  .replace(/\?\.\?n/g, "\n")
+  .replace(/\?\.\?/g, "\\")
+
+const callout = computed(() => dropNewLines(profile.value.callout || ""))
 </script>
 
 <script lang="ts">

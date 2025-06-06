@@ -37,7 +37,7 @@
             {{ project.title }}
           </span>
         </ProseH2>
-          <template v-if="hasCompany(project)">
+          <!-- <template v-if="hasCompany(project)">
             <span
               v-if="hasCompany(project)"
               class="project-company"
@@ -50,9 +50,9 @@
             >
               {{ project.company.name }}
             </NuxtLink>
-          </template>
+          </template> -->
           <div class="project-description">
-            <ContentDoc :value="project" />
+            <ContentRenderer :value="project" />
           </div>
         </div>
         <div class="project-footer">
@@ -144,7 +144,7 @@
               </NuxtLink>
             </template>
             <div class="project-description">
-              <ContentDoc :value="project" />
+              <ContentRenderer :value="project" />
             </div>
           </div>
           <div class="project-footer">
@@ -191,10 +191,9 @@ const hasCompany = (project: any) => typeof project.company !== "undefined"
 // read 'featured projects' data
 const { data } = await useAsyncData(
   async () => {
-    const _projectsData = queryContent<MarkdownParsedContent>()
-      .where({ _path: { $regex: "^/projects" } })
-      .sort({ date: -1, order: 1 })
-      .find()
+    const _projectsData = await queryCollection("projects")
+      .order("date", "DESC")
+      .all()
     return _projectsData
   },
 )
@@ -232,11 +231,10 @@ const sortedCategories = Array.from(categorized.entries()).sort(
 // read 'featured projects' data
 const { data: featuredData } = await useAsyncData(
   async () => {
-    const _projectsData = queryContent()
-      .where({ _path: { $regex: "^/projects" } })
-      .where({ featured: true })
-      .sort({ date: -1 })
-      .find()
+    const _projectsData = queryCollection("projects")
+      .where("featured", "=", "1")
+      .order("date", "DESC")
+      .all()
     return _projectsData
   },
 )

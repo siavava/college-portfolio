@@ -4,7 +4,7 @@
       About
     </ProseH4>
 
-    <ContentDoc
+    <ContentRenderer
       :value="profile"
       class="doc"
     />
@@ -13,14 +13,12 @@
 
 <script lang="ts" setup>
 
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const { data: profile } = await useAsyncData(
   async () => {
-    const _contactData = await queryContent<MarkdownParsedContent>()
-      .where({ _path: "/profile/brief"})
-      .findOne()
-    return _contactData
+    return queryCollection("profile")
+      .first();
   },
 )
 </script>
