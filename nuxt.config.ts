@@ -3,13 +3,15 @@
 export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
-    // payloadExtraction: true,
+    payloadExtraction: true,
   },
+
   routeRules: {
     "/**": {
       prerender: true,
     },
   },
+
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },
@@ -47,10 +49,12 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   typescript: {
     shim: false,
     strict: false,
   },
+
   modules: [
     "@nuxt/content",
     // "@nuxt/ui",
@@ -62,12 +66,14 @@ export default defineNuxtConfig({
       Disallow: "",
     }],
   ],
+
   colorMode: {
     preference: "light", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
   },
-  
+
   router: { },
+
   devtools: {
     // Enable devtools (default: true)
     enabled: true,
@@ -78,6 +84,7 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+
   content: {
     experimental: {
       nativeSqlite: false,
@@ -98,6 +105,7 @@ export default defineNuxtConfig({
     "@/styles/transitions.sass",
     "@/styles/typography.scss",
   ],
+
   components: {
     dirs: [
       "~/components/icons",
@@ -105,6 +113,7 @@ export default defineNuxtConfig({
       "~/components",
     ],
   },
+
   image: {
     // The screen sizes predefined by `@nuxt/image-edge`:
     screens: {
@@ -121,4 +130,6 @@ export default defineNuxtConfig({
     // ipx: {},
     dir: "static",
   },
+
+  compatibilityDate: "2025-06-06",
 })
