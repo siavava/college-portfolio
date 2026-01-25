@@ -59,7 +59,6 @@
 import { parseMarkdown } from "#imports"
 
 const parsedMarkdown = await parseMarkdown(
-  "footer-comment",
   `I’m reciting that **quality affects all aspects of my pursuits**.
   I want to imbue quality in everything I do.
   This skill develops while doing.
