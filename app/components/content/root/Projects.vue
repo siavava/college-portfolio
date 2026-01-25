@@ -188,8 +188,10 @@ import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const hasCompany = (project: any) => typeof project.company !== "undefined"
 
+const { path } = useRoute()
 // read 'featured projects' data
 const { data } = await useAsyncData(
+  `featured-projects-data-${path}`,
   async () => {
     const _projectsData = await queryCollection("projects")
       .order("date", "DESC")
@@ -230,6 +232,7 @@ const sortedCategories = Array.from(categorized.entries()).sort(
 // get featured projects
 // read 'featured projects' data
 const { data: featuredData } = await useAsyncData(
+  "archive-all-projects-data",
   async () => {
     const _projectsData = queryCollection("projects")
       .where("featured", "=", "1")

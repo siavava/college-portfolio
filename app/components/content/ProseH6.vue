@@ -37,8 +37,8 @@ defineProps<{
 }>()
 
 const heading = 1
-const { anchorLinks } = useRuntimeConfig().public.content
-const generate = anchorLinks?.depth >= heading
+// const { anchorLinks } = useRuntimeConfig().public.content
+const generate = false // anchorLinks?.depth >= heading
 </script>
 
 <style lang="sass" scoped>

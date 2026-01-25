@@ -1,32 +1,32 @@
 <template>
   <section class="jobs">
-    <ProseH4 id="education">
-      Education
+    <ProseH4 id="work">
+      Work Experience
     </ProseH4>
     <div class="jobs-list">
       <div
-        v-for="experience, i in experiences"
+        v-for="job, i in jobs"
         :key="i"
         class="work-item"
       >
         <div class="range">
-          <span class="date">{{ experience.start }}</span>
+          <span class="date">{{ job.start }}</span>
           <span class="date"> &mdash; </span>
-          <span class="date"> {{ experience.end }} </span>
+          <span class="date"> {{ job.end }} </span>
         </div>
         <div class="work-info">
           <ProseH2>
             <ProseA
-              :href="experience.url"
+              :href="job.url"
               class="link"
               fancy
               bold
             >
               <span>
-                {{ experience.title }}
+                {{ job.title }}
                 <span class="company">
                   at
-                  {{ experience.school }}
+                  {{ job.company }}
                 </span>
               </span>
             </ProseA>
@@ -34,7 +34,7 @@
 
           <ContentRenderer
             class="jobs-doc"
-            :value="experience"
+            :value="job"
           />
         </div>
       </div>
@@ -43,34 +43,30 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
-
+const { path } = useRoute()
 // read 'job-info' data from Markdown files
-const { data: experiencesData } = await useAsyncData(
-  `school-${useRoute().path}`,
+const { data: jobsData } = await useAsyncData(
+  `jobs-data-${path}`,
   async () => {
-    const _expData = await queryCollection("education")
+    const _jobsData = await queryCollection("jobs")
       .order("date", "DESC")
       .all()
-    return _expData
+    return _jobsData
   },
 )
 
 // parse job info and store in an array, sorted by date
 // const jobs = Array<ParsedJobInfo>();
-const experiences = experiencesData.value || []
-
+const jobs = jobsData.value || []
 </script>
 
 <script lang="ts">
 export default {
-  name: "Education",
+  name: "Jobs",
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use "@/styles/typography"
 @use "@/styles/mixins"
 @use "@/styles/colors"
@@ -80,12 +76,12 @@ export default {
     font-size: typography.font-size(xs) !important
 
 .work-item
-
+  
   @include mixins.split
 
   &
     // display: flex
-    // flex-direction: row
+    // flex-direction: 
     font-size: typography.font-size(m)
     margin-top: 4em
 

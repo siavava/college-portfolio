@@ -14,8 +14,10 @@
 <script lang="ts" setup>
 
 // import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+const { path } = useRoute()
 
 const { data: profile } = await useAsyncData(
+  `profile-${path}`,
   async () => {
     return queryCollection("profile")
       .first();

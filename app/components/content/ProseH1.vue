@@ -32,6 +32,7 @@
 import { useRuntimeConfig } from "#imports"
 
 defineProps<{ id: string }>()
+const test = 'hello'
 
 const heading = 1
 // @ts-ignore

@@ -112,7 +112,7 @@ const menu = ref<HTMLElement | null>(null)
 const route = useRoute()
 
 // const { menuOpen, toggleMenu } = inject("menu-options")
-const { menuOpen, toggleMenu } = inject('menu-options')
+const { menuOpen, toggleMenu } = inject(MENU_OPTIONS)
 
 onMounted(() => {
   const menuButton = document.getElementById("menu-button")
@@ -129,11 +129,11 @@ onMounted(() => {
 
 // read 'featured projects' data
 const { data } = await useAsyncData(
+  'menu-featured-projects',
   async () => {
-    const _projectsData = queryCollection("projects")
+    return await queryCollection("projects")
       .order("date", "DESC")
       .all()
-    return _projectsData
   },
 )
 

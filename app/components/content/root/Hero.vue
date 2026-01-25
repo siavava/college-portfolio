@@ -19,12 +19,12 @@
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 // import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
-
+const { path } = useRoute()
 const { data: profile } = await useAsyncData(
+  `hero-data-${path}`,
   async () => {
-    const _contactData = await queryCollection("profile")
+    return await queryCollection("profile")
       .first()
-    return _contactData
   },
 )
 

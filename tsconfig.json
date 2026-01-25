@@ -1,18 +1,25 @@
 {
   // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
+  "includes": [
+    "types/*.d.ts",
+  ],
   "compilerOptions": {
     // ...
     "sourceMap": true,
     "target": "ESNext",
     "allowJs": false,
-    "moduleResolution": "Node",
-    "lib": ["ESNext", "DOM", "es5", "es6", "DOM.Iterable"],
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "bundler",
+    "strictPropertyInitialization": false,
+    "lib": [
+      "ESNext",
+      "DOM",
+      "es5",
+      "es6",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
-    // "esModuleInterop": true,
-    // "noUnusedLocals": true,
-    // "resolveJsonModule": true,
-    // "allowSyntheticDefaultImports": true,
     "types": [
       "@types/node", // standard node types
       "vite/client", // if using vite

@@ -3,7 +3,7 @@
 export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
-    payloadExtraction: true,
+    payloadExtraction: false,
   },
 
   routeRules: {
@@ -68,6 +68,7 @@ export default defineNuxtConfig({
   ],
 
   colorMode: {
+    classSuffix: "-mode",
     preference: "light", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
   },

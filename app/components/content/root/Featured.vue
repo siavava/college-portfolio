@@ -121,15 +121,15 @@ const props = defineProps({
 
 const hasCompany = (project: any) => typeof project.company !== "undefined"
 
+const { path } = useRoute()
 // read 'featured projects' data
 const { data } = await useAsyncData(
-  `projects-${useRoute().path}`,
+  `featured-projects-${path}`,
   async () => {
-    const _projectsData = queryCollection("projects")
+    return await queryCollection("projects")
       .where("featured", "=", "1")
       .order("date", "DESC")
       .all()
-    return _projectsData
   },
 )
 

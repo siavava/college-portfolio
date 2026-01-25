@@ -78,7 +78,7 @@ const toggleColorMode = () => {
 //   // colorMode.preference = colorMode.preference === "dark" ? "light" : "dark"
 // }
 
-const { toggleMenu } = inject("menu-options")
+const { toggleMenu } = inject(MENU_OPTIONS)
 </script>
 
 <style lang="sass">

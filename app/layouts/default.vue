@@ -21,7 +21,7 @@ const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
 };
 
-provide("menu-options", {
+provide(MENU_OPTIONS, {
   menuOpen,
   toggleMenu
 });

@@ -40,9 +40,10 @@
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 // import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+const { path } = useRoute()
 
 const { data: contact } = await useAsyncData(
-  "personal-contact",
+  `contact-data-${path}`,
   async () => {
     const _contactData = await queryCollection("contact")
       .first()
