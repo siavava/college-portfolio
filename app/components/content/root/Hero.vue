@@ -1,24 +1,15 @@
 <template>
-  <section>
-    <div class="profile-info">
-      <div class="profile-text">
-        <div class="name">
-          <h1>
-            {{ profile.name }}
-          </h1>
-        </div>
-        <p
-          class="hero-callout"
-          v-html="callout" />
+  <section class="hero-section">
+    <div class="dictionary-entry">
+      <h1 class="word">{{ profile.name }}</h1>
+      <div class="pronunciation" v-if="profile.pronunciation">
+        {{ profile.pronunciation }}
       </div>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 const { path } = useRoute()
 const { data: profile } = await useAsyncData(
   `hero-data-${path}`,
@@ -27,13 +18,6 @@ const { data: profile } = await useAsyncData(
       .first()
   },
 )
-
-const dropNewLines = (title: string) => title
-  .replace(/\\/gm, "?.?")
-  .replace(/\?\.\?n/g, "\n")
-  .replace(/\?\.\?/g, "\\")
-
-const callout = computed(() => dropNewLines(profile.value.callout || ""))
 </script>
 
 <script lang="ts">
@@ -46,56 +30,47 @@ export default {
 @use "@/styles/mixins"
 @use "@/styles/colors"
 @use "@/styles/typography"
-@use "@/styles/geometry"
 
-.profile-info
-  width: min(400px, 90svw)
-  display: flex
-  flex-direction: row
-  align-content: center
+.hero-section
+  padding-top: 120px !important
+  padding-bottom: 0 !important
 
+.dictionary-entry
+  margin-bottom: 2em
 
-  margin-top: 100px
+  .word
+    font-size: 2.5em
+    font-weight: 500
+    letter-spacing: -1.5px
+    color: var(--lightest-foreground)
+    margin-bottom: 0.1em
+    font-family: typography.font("sans-serif"), sans-serif
 
-  .profile-image
-    width: 100px
-    aspect-ratio: 1/1
-    border-radius: 50%
-    overflow: hidden
+  .pronunciation
+    font-family: typography.font("serif"), serif
+    font-style: italic
+    font-size: typography.font-size("m")
+    color: var(--foreground)
+    margin-bottom: 0.8em
 
-    // maintain aspect ratio
-    object-fit: cover
+  .definition
+    font-family: typography.font("serif"), serif
+    font-size: typography.font-size("l")
+    color: var(--foreground)
+    line-height: 1.6
+    max-width: 480px
 
-  .profile-text
-    height: auto
-    display: flex
-    flex-direction: column
-    margin-top: 60px
-    gap: 140px
+.role
+  font-family: typography.font("serif"), serif
+  font-size: typography.font-size("m")
+  color: var(--foreground)
+  line-height: 1.7
 
-    .name
-      display: flex
-      flex-direction: column
+  .role-prefix
+    color: var(--lightest-foreground)
+    font-weight: 500
 
-      & > h1
-        font-weight: 600
-        letter-spacing: -2px
-        margin: 0
-        font-size: 30px
-      
-        &:first-of-type
-          padding-top: 20px
-
-    .hero-callout
-      font-weight: 500
-      margin: 0.5em 0
-      color: var(--lightest-foreground)
-      line-height: 1.5
-      font-size: 20px
-
-      @include mixins.underline
-
-      @media screen and (max-width: 600px)
-        font-size: 18px
-
+  .role-previous
+    display: block
+    margin-top: 0.2em
 </style>

@@ -1,25 +1,11 @@
 <template>
   <header class="app-header">
-    <div class="header-item left">
-      <div class="column">
-        <span class="column-item">Work </span>
-        <span class="column-item emphasized">by Amittai Siavava</span>
-      </div>
-    </div>
-
-    <div class="header-item left">
-      <div class="column">
-        <span class="column-item">Software Engineer </span>
-        <span class="column-item emphasized">Instagram</span>
-      </div>
-    </div>
-
-    <div class="header-item left">
-      <NuxtLink to="/"> Home</NuxtLink>
-      <NuxtLink to="/archive"> Archive</NuxtLink>
-      <NuxtLink to="https://amittai.space"> Blog</NuxtLink>
-    </div>
-    <div class="header-item right">
+    <nav class="nav-links">
+      <NuxtLink to="/" class="nav-link" :class="{ active: route.path === '/' }">About</NuxtLink>
+      <NuxtLink to="/archive" class="nav-link" :class="{ active: route.path === '/archive' }">Projects</NuxtLink>
+      <NuxtLink to="https://amittai.space" class="nav-link" target="_blank" rel="noopener noreferrer">Writing</NuxtLink>
+    </nav>
+    <div class="nav-actions">
       <Actions />
     </div>
   </header>
@@ -31,29 +17,20 @@ const route = useRoute()
 
 <style lang="sass" scoped>
 @use "@/styles/typography"
-.app-header
-  font-size: typography.font-size("xs")
-  padding: 1.5em 0
-  margin: 0 auto
-  text-align: center
 
+.app-header
   display: flex
   justify-content: space-between
+  align-items: center
+  max-width: 640px
+  margin: 0 auto
+  padding: 1.5em 0
 
   position: fixed
   top: 0
   left: 0
   right: 0
   z-index: 100
-
-
-  & > :not(.header-item:first-of-type, .header-item.right)
-
-    @media screen and (max-width: 960px)
-      display: none
-
-  @media screen and (max-width: 960px)
-    justify-content: space-between
 
   &::before
     content: ""
@@ -62,39 +39,25 @@ const route = useRoute()
     left: -5000px
     height: 100%
     width: 10000px
-    // background: var(--background)
-    backdrop-filter: blur(1px)
-    // opacity: 0.1
-    z-index: 99
+    backdrop-filter: blur(2px)
+    z-index: -1
     mask: linear-gradient(black, rgba(black, 0.5), transparent)
 
-  .header-item
-    display: flex
-    gap: 1em
-    align-items: center
-    justify-content: flex-start
-    flex-grow: 0
-    flex-shrink: 1
-    margin: 0 1.7em
-    z-index: 101
+.nav-links
+  display: flex
+  gap: 1.5em
+  z-index: 101
 
-    color: var(--foreground)
+.nav-link
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  color: var(--foreground)
+  transition: color 0.2s ease
 
-    a
-      color: inherit
+  &:hover,
+  &.active
+    color: var(--lightest-foreground)
 
-  .column
-    display: flex
-    flex-direction: column
-    gap: 0
-    align-items: flex-start
-
-    z-index: 101
-
-    .column-item
-      line-height: 1.3
-      // color: var(--border-color)
-
-      &.emphasized
-        color: var(--lightest-foreground)
+.nav-actions
+  z-index: 101
 </style>

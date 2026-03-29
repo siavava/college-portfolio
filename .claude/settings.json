@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -30 /Users/siavava/workspace/web/portfolio/content/profile/brief/*.md)",
+      "Bash(head -30 /Users/siavava/workspace/web/portfolio/content/jobs/01-compsight/*.md)",
+      "Bash(head -40 /Users/siavava/workspace/web/portfolio/content/profile/contact/*.md)",
+      "WebFetch(domain:www.floguo.com)"
+    ]
+  }
+}

@@ -398,4 +398,86 @@ explicitly, e.g.
   src: url('@/assets/fonts/NeueMontreal/PPNeueMontreal-Bold.otf') format('truetype');
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+// Junicode Variable
+@font-face {
+  font-family: "Junicode Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@/assets/fonts/Junicode/JunicodeVF-Roman.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: "Junicode Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@/assets/fonts/Junicode/JunicodeVF-Italic.woff2') format('woff2');
+}
+
+// LinoType Univers W01
+@font-face {
+  font-family: 'LinoType Univers W01';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('@/assets/fonts/LinoTypeUniversW01/2.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'LinoType Univers W01';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('@/assets/fonts/LinoTypeUniversW01/1.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'LinoType Univers W01';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('@/assets/fonts/LinoTypeUniversW01/3.woff2') format('woff2');
+}
+
+// 26A1 Marund Blurred
+@font-face {
+  font-family: "26A1 Marund Blurred";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url('@/assets/fonts/marund/26A1Marund-3222Blurred.otf') format('opentype');
+}
+
+@font-face {
+  font-family: "26A1 Marund Blurred";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@/assets/fonts/marund/26A1Marund-5222Blurred.otf') format('opentype');
+}
+
+@font-face {
+  font-family: "26A1 Marund Blurred";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@/assets/fonts/marund/26A1Marund-7222Blurred.otf') format('opentype');
+}
+
+// Iosevka Fixed Curly
+@font-face {
+  font-family: "Iosevka Fixed Curly";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@/assets/fonts/Iosevka-Fixed/Iosevka-Fixed-Curly-Extended-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: "Iosevka Fixed Curly";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('@/assets/fonts/Iosevka-Fixed/Iosevka-Fixed-Curly-Extended-Medium.woff2') format('woff2');
+}

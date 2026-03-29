@@ -1,39 +1,34 @@
 <template>
   <section class="jobs">
-    <ProseH4 id="work">
-      Work Experience
-    </ProseH4>
-    <div class="jobs-list">
+    <h4 class="section-heading" id="work">
+      Experience
+    </h4>
+    <div class="entries">
       <div
         v-for="job, i in jobs"
         :key="i"
-        class="work-item"
+        class="entry"
       >
-        <div class="range">
-          <span class="date">{{ job.start }}</span>
-          <span class="date"> &mdash; </span>
-          <span class="date"> {{ job.end }} </span>
+        <div class="entry-date">
+          <span>{{ job.start }}</span>
+          <span> &mdash; </span>
+          <span>{{ job.end }}</span>
         </div>
-        <div class="work-info">
-          <ProseH2>
+        <div class="entry-content">
+          <h3 class="entry-title">
             <ProseA
               :href="job.url"
-              class="link"
               fancy
               bold
             >
-              <span>
-                {{ job.title }}
-                <span class="company">
-                  at
-                  {{ job.company }}
-                </span>
+              {{ job.title }}
+              <span class="entry-org">
+                at {{ job.company }}
               </span>
             </ProseA>
-          </ProseH2>
-
+          </h3>
           <ContentRenderer
-            class="jobs-doc"
+            class="entry-description"
             :value="job"
           />
         </div>
@@ -44,7 +39,7 @@
 
 <script setup lang="ts">
 const { path } = useRoute()
-// read 'job-info' data from Markdown files
+
 const { data: jobsData } = await useAsyncData(
   `jobs-data-${path}`,
   async () => {
@@ -55,8 +50,6 @@ const { data: jobsData } = await useAsyncData(
   },
 )
 
-// parse job info and store in an array, sorted by date
-// const jobs = Array<ParsedJobInfo>();
 const jobs = jobsData.value || []
 </script>
 
@@ -69,20 +62,30 @@ export default {
 <style lang="sass" scoped>
 @use "@/styles/typography"
 @use "@/styles/mixins"
-@use "@/styles/colors"
 
-.jobs-doc
-  .prose-table
-    font-size: typography.font-size(xs) !important
+.section-heading
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: var(--foreground)
+  font-weight: 500
+  margin-bottom: 2em
 
-.work-item
-  
+.entry
   @include mixins.split
 
   &
-    // display: flex
-    // flex-direction: 
-    font-size: typography.font-size(m)
-    margin-top: 4em
+    margin-top: 3em
 
+  &:first-child
+    margin-top: 0
+
+.entry-date
+  font-size: typography.font-size("xs")
+  color: var(--foreground)
+
+.entry-org
+  font-weight: 400
+  color: var(--foreground)
 </style>

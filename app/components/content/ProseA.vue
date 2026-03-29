@@ -24,6 +24,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  subtle: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const external = computed(() => props.blank || (props.to || props.href || "").startsWith("http"))
@@ -31,7 +35,7 @@ const external = computed(() => props.blank || (props.to || props.href || "").st
 
 <template>
   <span
-    :class="{'link-wrapper': true, 'fancy': fancy}"
+    :class="{'link-wrapper': true, 'fancy': fancy, 'subtle': subtle}"
   >
     <NuxtLink
       v-if="external"
@@ -118,8 +122,35 @@ const external = computed(() => props.blank || (props.to || props.href || "").st
   display: inline
   pointer-events: all
 
+  transition: background 0.3s ease-out
+  border-bottom: 1px dotted var(--border-color)
+
   &:hover
     cursor: pointer
+    background: var(--primary-highlight)
+
+  &.subtle
+    border-bottom: none
+    font-size: inherit
+
+    &:hover
+      background: none
+
+    .link
+      color: var(--lightest-foreground)
+      font-size: inherit
+      text-decoration: underline
+      text-underline-offset: 3px
+      text-decoration-color: var(--foreground)
+      transition: text-decoration-color 0.2s ease
+
+      &:hover
+        text-decoration-color: var(--lightest-foreground)
+        background: none
+
+      & > span
+        border-bottom: none
+        font-size: inherit
 
 .link
   color: var(--lightest-foreground)

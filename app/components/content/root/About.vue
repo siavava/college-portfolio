@@ -1,19 +1,17 @@
 <template>
   <section class="about">
-    <ProseH4 id="about">
+    <h4 class="section-heading" id="about">
       About
-    </ProseH4>
+    </h4>
 
     <ContentRenderer
       :value="profile"
-      class="doc"
+      class="about-content"
     />
   </section>
 </template>
 
 <script lang="ts" setup>
-
-// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 const { path } = useRoute()
 
 const { data: profile } = await useAsyncData(
@@ -25,7 +23,21 @@ const { data: profile } = await useAsyncData(
 )
 </script>
 
-<style lang="sass">
-.doc
-  margin-top: 4em
+<style lang="sass" scoped>
+@use "@/styles/typography"
+
+.section-heading
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: var(--foreground)
+  font-weight: 500
+  margin-bottom: 2em
+
+.about-content
+  font-family: typography.font("serif"), serif
+  font-size: typography.font-size("m")
+  line-height: 1.7
+  color: var(--foreground)
 </style>

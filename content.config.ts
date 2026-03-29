@@ -33,7 +33,8 @@ export const collections = {
     source: "profile/brief/*.md",
     schema: z.object({
       name: z.string(),
-      callout: z.string(),
+      pronunciation: z.string().optional(),
+      partOfSpeech: z.string().optional(),
     })
   }),
 

@@ -1,7 +1,7 @@
 <template>
-  <Projects />
+  <div />
 </template>
 
-<script setup lang="ts">
-console.info("Hello from the archive page!")
+<script lang="ts" setup>
+navigateTo('/projects', { redirectCode: 301 })
 </script>

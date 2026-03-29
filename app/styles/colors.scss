@@ -34,10 +34,7 @@ $color-modes: ("one", "two", "three");
 
 $light-palette: (
 
-  // "secondary-highlight": rgb(240, 191, 76),
   "secondary-highlight": rgba(255, 88, 0, 1),
-  // "primary-highlight": rgba(240, 191, 76, 0.7),
-  // "primary-highlight": rgba(255, 246, 192, 0.7),
   "primary-highlight": rgba(255, 246, 192, 1),
 
   "info-background": rgb(247, 252, 255),
@@ -48,17 +45,16 @@ $light-palette: (
 
   "error-background": rgb(255, 253, 245),
   "error-foreground": rgb(120, 53, 15),
-  
+
   "warning-background": rgb(253, 247, 247),
   "warning-foreground": rgb(253, 50, 50),
-  
+
   "critical-background": rgb(253, 247, 247),
   "critical-foreground": rgb(255, 10, 10),
 
   "text-highlight": #FFF6C0,
 
-  "background": #FCFCFC,
-  // "background": rgba(237, 237, 237, 1),
+  "background": #F8F6F2,
 
   "dark-background": #000000,
   "light-background": #2e2e2e,
@@ -66,24 +62,21 @@ $light-palette: (
   "fancy-background": color.scale(#0a192f, $lightness: 40%),
   "shadow": rgba(#000000, 0.1),
 
-  "dark-foreground": #000000,
+  "dark-foreground": rgba(0, 0, 0, 0.4),
 
-  // "foreground": rgba(0, 0, 0, 0.5),
-  "foreground": rgba(0, 0, 0, 0.5),
+  "foreground": rgba(71, 71, 71, 1),
 
-  "light-foreground": #0D0E10,
+  "light-foreground": rgba(0, 0, 0, 0.7),
   "lightest-foreground": #0D0E10,
 
-  "border-color": rgba(0, 0, 0, 0.1)
+  "border-color": rgb(235, 233, 230, .8)
 );
 
 $dark-palette: (
 
   "primary-highlight": #E47E5C,
-  // "primary-highlight": rgb(218, 241, 158),
 
   "secondary-highlight": rgba(255, 53, 0, 1),
-  // "secondary-highlight": #E47E5C,
 
   "info-background": rgba(5, 95, 249, 0.1),
   "info-foreground": #7aade0,
@@ -96,12 +89,7 @@ $dark-palette: (
   "critical-background": rgba(238, 12, 12, 0.15),
   "critical-foreground": #f42e4f,
 
-  // "background": #111111,
-  // "background": rgb(13, 13, 13, 1),
-  // "background": rgba(0, 0, 0, 1),
   "background": rgba(17, 17, 16, 1),
-  // "background": rgba(17, 17, 16, 1),
-  // "background": rgb(19, 20, 25),
 
   "dark-background": #000000,
   "light-background": #232323,
@@ -109,16 +97,13 @@ $dark-palette: (
   "fancy-background": color.adjust(#0a192f, $lightness: 40%),
   "shadow": rgba(#000000, 0.1),
 
-  "dark-foreground": #888888,
+  "dark-foreground": rgba(112, 112, 112),
 
-
-  // "foreground": rgba(232, 228, 229, 0.5),
-  "foreground": rgb(139, 139, 144),
-  // "foreground": #A0A0A0,
+  "foreground": rgba(217, 216, 225, 0.9),
   "light-foreground": rgba(217, 216, 225, 1),
-  "lightest-foreground": rgba(217, 216, 225, 1),
+  "lightest-foreground": #FFFFFF,
 
-  "border-color": rgba(255, 255, 255, 0.1)
+  "border-color": rgba(37, 37, 39, 0.7)
 );
 
 @function color($color-name, $mode: "light") {

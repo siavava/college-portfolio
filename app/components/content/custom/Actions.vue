@@ -1,17 +1,10 @@
 <template>
-  <div class="buttons-container">
-    <button
-      id="menu-button"
-      class="menu-button column-item emphasized"
-      @click.prevent="() => toggleMenu()"
-    >
-      {{ "Menu" }}
-    </button>
-    <span class="divider" />
+  <div class="actions-container">
     <button
       id="color-mode-button"
-      class="color-mode-button selector"
+      class="color-mode-button"
       @click="toggleColorMode"
+      aria-label="Toggle color mode"
     >
       <div class="icon">
         <svg
@@ -66,76 +59,38 @@ const toggleColorMode = () => {
   const nextIndex = (currentIndex + 1) % colorModes.length
   colorMode.preference = colorModes[nextIndex]
 }
-
-// const toggleColorMode = () => {
-//   if (colorMode.preference === "light") {
-//     colorMode.preference = "dark"
-//   } else if (colorMode.preference === "dark") {
-//     colorMode.preference = "sepia"
-//   } else if (colorMode.preference === "sepia") {
-//     colorMode.preference = "light"
-//   }
-//   // colorMode.preference = colorMode.preference === "dark" ? "light" : "dark"
-// }
-
-const { toggleMenu } = inject(MENU_OPTIONS)
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use "@/styles/typography"
 
-.column-item.menu-button
-  line-height: 1.3
-  background: transparent
-  color: var(--border-color)
-  font-family: typography.font("sans-serif")
-  font-size: 1em
-
-  &:hover
-    cursor: pointer
-
-  &.emphasized
-    color: var(--lightest-foreground)
-
-.buttons-container
+.actions-container
   display: flex
   align-items: center
 
-.divider
-  background: var(--border-color)
-  width: 0.5px
-  height: 1.5em
-  margin: 0 30px
-
-.selector
+.color-mode-button
   color: var(--lightest-foreground)
   background: transparent
-  font-size: typography.font-size("xxs")
-  font-weight: 600
-  transition: all 2s ease
-
-  margin: 0 20px 0 10px
-
+  border: none
+  cursor: pointer
   display: flex
   align-items: center
   justify-content: center
   width: 20px
   height: 20px
+  transition: opacity 0.2s ease
 
   &:hover
-    cursor: pointer
+    opacity: 0.7
 
-  // dont show outline when selected
   &:focus
     outline: none
 
 .icon
-  // height: 100%
-  height: 30px
+  height: 18px
   aspect-ratio: 1/1
 
   svg
     width: 100% !important
     height: 100% !important
-
 </style>

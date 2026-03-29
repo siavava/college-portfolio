@@ -1,96 +1,219 @@
 <template>
   <div id="root">
-    <div class="root-background">
-    <!-- <BackgroundCanvas class="default-canvas" /> -->
-    <Menu />
-    <AppHeader />
-    <main>
-      <slot id="content" />
-    </main>
-    <AppFooter />
+    <aside class="sidebar">
+      <div class="ribbon" />
+      <nav class="sidebar-nav">
+        <NuxtLink
+          to="/"
+          class="nav-item"
+          :class="{ active: route.path === '/' }"
+        >
+          {{ nav.about }}
+        </NuxtLink>
+        <NuxtLink
+          to="/projects"
+          class="nav-item"
+          :class="{ active: route.path.startsWith('/projects') }"
+        >
+          {{ nav.projects }}
+        </NuxtLink>
+        <NuxtLink
+          to="/experience"
+          class="nav-item"
+          :class="{ active: route.path === '/experience' }"
+        >
+          {{ nav.experience }}
+        </NuxtLink>
+        <NuxtLink
+          :to="nav.writingUrl"
+          class="nav-item"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ nav.writing }}
+        </NuxtLink>
+      </nav>
+    </aside>
+    <div class="main-wrapper">
+      <main class="main-content">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <span class="copyright">{{ footer.copyright(new Date().getFullYear()) }}</span>
+          <div class="footer-actions">
+            <button class="footer-link" @click="toggleColorMode">
+              {{ colorMode.preference === 'dark' ? footer.light : footer.dark }}
+            </button>
+          </div>
+        </div>
+      </footer>
     </div>
-    <SpeedInsights/>
+    <SpeedInsights />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { SpeedInsights } from "@vercel/speed-insights/nuxt"
 
-const menuOpen = ref(false);
-const toggleMenu = () => {
-  menuOpen.value = !menuOpen.value;
-};
+const route = useRoute()
+const colorMode = useColorMode()
+const { nav, footer } = labels()
 
-provide(MENU_OPTIONS, {
-  menuOpen,
-  toggleMenu
-});
+const toggleColorMode = () => {
+  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+}
+
+const menuOpen = ref(false)
+const toggleMenu = () => { menuOpen.value = !menuOpen.value }
+provide(MENU_OPTIONS, { menuOpen, toggleMenu })
 </script>
 
 <style lang="sass">
 @use "@/styles/colors"
 @use "@/styles/typography"
 
+$sidebar-width: 256px
+
 #root
-  min-height: 100svh
+  display: flex
+  height: 100svh
+  overflow: hidden
+
+// ── Sidebar ──
+.sidebar
+  width: $sidebar-width
+  flex-shrink: 0
+  position: fixed
+  top: 0
+  left: 0
+  height: 100vh
   display: flex
   flex-direction: column
+  z-index: 10
+  border-right: double 3px var(--border-color)
 
-  .root-background
-    // position: absolute
-    // top: 0
-    // left: 0
-    // width: 10000px
-    // height: 10000px
+  @media screen and (max-width: 768px)
     width: 100%
-    position: relative
+    height: auto
+    position: fixed
+    top: 0
+    flex-direction: row
+    align-items: center
+    background: var(--background)
+    border-bottom: double 3px var(--border-color)
+    border-right: none
+    z-index: 100
 
-    & > :not(canvas)
-      z-index: 11
-    
+// ── Ribbon ──
+.ribbon
+  width: 32px
+  height: 160px
+  margin-left: 28px
+  flex-shrink: 0
+  background: linear-gradient(135deg, oklch(0.42 0.18 25), oklch(0.52 0.18 25) 50%, oklch(0.42 0.18 25))
+  border: 1px solid oklch(0.42 0.18 25)
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 12px), 0 100%)
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3), inset -1px -1px 2px rgba(0, 0, 0, 0.2)
 
-    &::after
-      content: ""
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-      height: 100%
-      background-size: 128px
-      background-repeat: repeat
-      // background-image: url(https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png)
-      background-image: url(/background-grain.png)
-      // opacity: 0.03
-      opacity: 0.03
-      border-radius: 0px
-      z-index: 10
+  @media screen and (max-width: 768px)
+    width: 20px
+    height: 80px
+    margin-left: 16px
 
-      pointer-events: none
+// ── Navigation ──
+.sidebar-nav
+  display: flex
+  flex-direction: column
+  gap: 1em
+  padding: 56px 32px 32px
 
-      // background tint
-      // backdrop-filter: blur(20px) brightness(0.9)
+  @media screen and (max-width: 768px)
+    flex-direction: row
+    padding: 12px 16px
+    gap: 1.5em
 
-      display: none
+.nav-item
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: 12px
+  text-transform: uppercase
+  letter-spacing: 0.06em
+  color: var(--foreground)
+  opacity: 0.4
+  transition: opacity 0.2s ease, color 0.2s ease
+  text-decoration: none
 
-      // .dark-mode &
-      //   display: block
+  &:hover
+    opacity: 0.75
 
-main
-  width: min(100svw, 640px)
-  // padding: 0 clamp(0.5em, 3vw, 0.5em)
+  &.active
+    opacity: 1
+    color: var(--lightest-foreground)
+    font-weight: 400
+
+// ── Main wrapper ──
+.main-wrapper
+  margin-left: $sidebar-width
+  flex: 1
+  display: flex
+  flex-direction: column
+  height: 100svh
+  overflow: hidden
+
+  @media screen and (max-width: 768px)
+    margin-left: 0
+    margin-top: 60px
+    height: calc(100svh - 60px)
+
+.main-content
+  flex: 1
+  overflow-y: auto
+
+main section
   padding: 0
-  margin: auto
-  font-weight: 400
-  line-height: 22px
-  z-index: 0
+  margin: 0
 
-// #content
-//   width: 100%
-//   height: 100%
-//   background-size: 128px
-//   background-repeat: repeat
-//   background-image: url(https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png)
-//   opacity: 0.03
-//   border-radius: 0px
+// ── Footer ──
+.site-footer
+  border-top: 0.5px solid var(--border-color)
+  padding: 16px 40px
+  flex-shrink: 0
+  position: relative
+  z-index: 40
+  background: var(--background)
 
+  @media screen and (max-width: 768px)
+    padding: 16px 20px
+
+  .footer-inner
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  .copyright
+    font-family: typography.font("sans-serif"), sans-serif
+    font-size: 10px
+    text-transform: uppercase
+    letter-spacing: 0.08em
+    color: var(--foreground)
+    opacity: 0.5
+
+  .footer-actions
+    display: flex
+    gap: 1em
+
+  .footer-link
+    font-family: typography.font("sans-serif"), sans-serif
+    font-size: 10px
+    text-transform: uppercase
+    letter-spacing: 0.08em
+    color: var(--foreground)
+    opacity: 0.5
+    background: none
+    border: none
+    cursor: pointer
+    transition: opacity 0.2s ease
+
+    &:hover
+      opacity: 0.8
 </style>

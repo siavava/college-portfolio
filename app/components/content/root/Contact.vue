@@ -1,18 +1,18 @@
 <template>
   <section>
-    <ProseH4 id="contact">
+    <h4 class="section-heading" id="contact">
       Contact
-    </ProseH4>
+    </h4>
     <div class="contacts-list">
       <div
         v-for="link, i in contact.links"
         :key="i"
         class="contact-item"
       >
-        <div class="range">
+        <div class="contact-name">
           {{ link.name }}
         </div>
-        <div class="work-info">
+        <div class="contact-value">
           <hr class="separator" />
           <ProseA
             v-if="link.url"
@@ -37,9 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 const { path } = useRoute()
 
 const { data: contact } = await useAsyncData(
@@ -55,13 +52,20 @@ const { data: contact } = await useAsyncData(
 <style lang="sass" scoped>
 @use "@/styles/mixins"
 @use "@/styles/typography"
-@use "@/styles/colors"
+
+.section-heading
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: var(--foreground)
+  font-weight: 500
+  margin-bottom: 2em
 
 .contacts-list
-  margin-top: 4em
-  
-.contact-item
+  margin-top: 0
 
+.contact-item
   @include mixins.split
 
   &
@@ -72,7 +76,7 @@ const { data: contact } = await useAsyncData(
 .link
   color: var(--lightest-foreground)
 
-.work-info
+.contact-value
   display: flex
   justify-content: flex-end
   gap: 1em
@@ -84,12 +88,10 @@ const { data: contact } = await useAsyncData(
     flex-grow: 1
     align-self: stretch
     border: none
-    border-top: 1px dashed var(--dark-foreground)
+    border-top: 1px dashed var(--border-color)
     height: 0.01em
     margin: auto
 
     @media screen and (max-width: 540px)
       display: none
-
-
 </style>

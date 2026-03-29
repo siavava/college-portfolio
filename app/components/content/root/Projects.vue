@@ -1,14 +1,13 @@
 <template>
   <section id="projects">
-    <ProseH1 id="projects">
+    <h2 class="archive-title" id="projects">
       Projects Archive
-    </ProseH1>
-    <!-- <br> -->
-    
+    </h2>
+
     <div class="project-category">
-      <ProseH4 class="category-title" id="featured">
+      <h4 class="category-title" id="featured">
         Featured
-      </ProseH4>
+      </h4>
     <div
       v-for="project, i in featuredProjects"
       :key="i"
@@ -98,9 +97,9 @@
       <!-- <div class="category-title" :id="category[0].replace(' ', '-')">
         {{ category[0] }}
       </div> -->
-      <ProseH4 class="category-title" :id="category[0].replace(' ', '-')">
+      <h4 class="category-title" :id="category[0].replace(' ', '-')">
         {{ category[0] }}
-      </ProseH4>
+      </h4>
       <div
         v-for="project, i in category[1]"
         :key="i"
@@ -252,43 +251,35 @@ const featuredProjects = featuredData.value || []
 @use "@/styles/mixins"
 @use "@/styles/colors"
 
-.projects-archive-container
-  width: 100vw
-  height: 100vh
-  position: fixed
-  top: 0
-  left: 0
-  // z-index: 1000
-  overflow: scroll
-  background: var(--background)
+.archive-title
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: 1.5em
+  font-weight: 500
+  letter-spacing: -0.5px
+  color: var(--lightest-foreground)
+  margin-bottom: 1em
 
 .project-category
+  padding-top: 80px
 
-  padding-top: 200px
-
-  
   &:is(:last-of-type)
-    margin-bottom: 200px
-
-  @media screen and (max-width: 768px)
-    padding-top: 100px
-
-    &:is(:last-of-type)
-      margin-bottom: 100px
-
-
+    margin-bottom: 80px
 
 .category-title
   text-transform: capitalize
-  // padding: 5px 0 100px 0
-  // height: 7em !important
-
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: var(--foreground)
+  font-weight: 500
+  margin-bottom: 2em
 
 .project
   @include mixins.split
 
   &:not(:first-of-type)
-    margin-top: 4em
+    margin-top: 3em
 
 .project-title
   font-weight: 600

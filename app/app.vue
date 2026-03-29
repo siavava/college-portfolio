@@ -19,7 +19,7 @@ useHead({
 })
 
 useServerSeoMeta({
-  ogSiteName: "Amittai's Blog",
+  ogSiteName: "Amittai",
 })
 
 // provide("navigation", navigation)

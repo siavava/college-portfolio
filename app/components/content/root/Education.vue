@@ -1,39 +1,34 @@
 <template>
-  <section class="jobs">
-    <ProseH4 id="education">
+  <section class="education">
+    <h4 class="section-heading" id="education">
       Education
-    </ProseH4>
-    <div class="jobs-list">
+    </h4>
+    <div class="entries">
       <div
         v-for="experience, i in experiences"
         :key="i"
-        class="work-item"
+        class="entry"
       >
-        <div class="range">
-          <span class="date">{{ experience.start }}</span>
-          <span class="date"> &mdash; </span>
-          <span class="date"> {{ experience.end }} </span>
+        <div class="entry-date">
+          <span>{{ experience.start }}</span>
+          <span> &mdash; </span>
+          <span>{{ experience.end }}</span>
         </div>
-        <div class="work-info">
-          <ProseH2>
+        <div class="entry-content">
+          <h3 class="entry-title">
             <ProseA
               :href="experience.url"
-              class="link"
               fancy
               bold
             >
-              <span>
-                {{ experience.title }}
-                <span class="company">
-                  at
-                  {{ experience.school }}
-                </span>
+              {{ experience.title }}
+              <span class="entry-org">
+                at {{ experience.school }}
               </span>
             </ProseA>
-          </ProseH2>
-
+          </h3>
           <ContentRenderer
-            class="jobs-doc"
+            class="entry-description"
             :value="experience"
           />
         </div>
@@ -43,13 +38,8 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
-
 const { path } = useRoute()
 
-// read 'job-info' data from Markdown files
 const { data: experiencesData } = await useAsyncData(
   `education-data-${path}`,
   async () => {
@@ -60,10 +50,7 @@ const { data: experiencesData } = await useAsyncData(
   },
 )
 
-// parse job info and store in an array, sorted by date
-// const jobs = Array<ParsedJobInfo>();
 const experiences = experiencesData.value || []
-
 </script>
 
 <script lang="ts">
@@ -72,23 +59,33 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @use "@/styles/typography"
 @use "@/styles/mixins"
-@use "@/styles/colors"
 
-.jobs-doc
-  .prose-table
-    font-size: typography.font-size(xs) !important
+.section-heading
+  font-family: typography.font("sans-serif"), sans-serif
+  font-size: typography.font-size("xs")
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  color: var(--foreground)
+  font-weight: 500
+  margin-bottom: 2em
 
-.work-item
-
+.entry
   @include mixins.split
 
   &
-    // display: flex
-    // flex-direction: row
-    font-size: typography.font-size(m)
-    margin-top: 4em
+    margin-top: 3em
 
+  &:first-child
+    margin-top: 0
+
+.entry-date
+  font-size: typography.font-size("xs")
+  color: var(--foreground)
+
+.entry-org
+  font-weight: 400
+  color: var(--foreground)
 </style>
