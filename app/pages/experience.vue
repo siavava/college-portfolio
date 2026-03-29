@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle" storageKey="panel:experience-nav")
+  PanelMenu(:title="title" :label="subtitle" storageKey="panel:experience-nav" :depth="0")
     PanelEntry(
       :active="activeGroup === 'work'"
       @select="selectGroup('work')"
@@ -16,8 +16,9 @@ PanelMulti
       :key="activeGroup"
       :title="activeGroup === 'work' ? workLabel : educationLabel"
       :label="entryCount(groupEntries.length)"
-      overlay
+      :depth="1"
       storageKey="panel:experience-list"
+      @back="selectGroup(activeGroup)"
     )
       PanelEntry(
         v-for="entry in groupEntries"
@@ -28,7 +29,7 @@ PanelMulti
         @select="selectItem(entry)"
       ) {{ entry.title }} at {{ orgName(entry) }}
 
-  transition(name="panel" mode="out-in")
+  transition(name="panel")
     PanelDetail(
       v-if="selectedItem"
       :key="selectedItem.path"

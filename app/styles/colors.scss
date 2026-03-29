@@ -34,7 +34,7 @@ $color-modes: ("one", "two", "three");
 
 $light-palette: (
 
-  "secondary-highlight": rgba(255, 88, 0, 1),
+  "secondary-highlight": #9f0712,
   "primary-highlight": rgba(255, 246, 192, 1),
 
   "info-background": rgb(247, 252, 255),
@@ -43,33 +43,33 @@ $light-palette: (
   "success-background": rgb(245, 254, 250),
   "success-foreground": rgb(6, 78, 59),
 
-  "error-background": rgb(255, 253, 245),
-  "error-foreground": rgb(120, 53, 15),
+  "error-background": rgb(253, 247, 247),
+  "error-foreground": #9f0712,
 
   "warning-background": rgb(253, 247, 247),
-  "warning-foreground": rgb(253, 50, 50),
+  "warning-foreground": #82181a,
 
   "critical-background": rgb(253, 247, 247),
-  "critical-foreground": rgb(255, 10, 10),
+  "critical-foreground": #460809,
 
-  "text-highlight": #FFF6C0,
+  "text-highlight": #f8f1e3,
 
-  "background": #F8F6F2,
+  "background": #faf8f5,
 
   "dark-background": #000000,
-  "light-background": #2e2e2e,
-  "lightest-background": #383838,
+  "light-background": #f4ede8,
+  "lightest-background": #e5dcd4,
   "fancy-background": color.scale(#0a192f, $lightness: 40%),
-  "shadow": rgba(#000000, 0.1),
+  "shadow": rgba(28, 25, 23, 0.05),
 
-  "dark-foreground": rgba(0, 0, 0, 0.4),
+  "dark-foreground": #a89a96,
 
-  "foreground": rgba(71, 71, 71, 1),
+  "foreground": #6b6063,
 
-  "light-foreground": rgba(0, 0, 0, 0.7),
-  "lightest-foreground": #0D0E10,
+  "light-foreground": #3d2e30,
+  "lightest-foreground": #11090b,
 
-  "border-color": rgb(235, 233, 230, .8)
+  "border-color": #e5dcd4
 );
 
 $dark-palette: (

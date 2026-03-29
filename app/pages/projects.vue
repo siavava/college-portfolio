@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle" storageKey="panel:projects-nav")
+  PanelMenu(:title="title" :label="subtitle" storageKey="panel:projects-nav" :depth="0")
     PanelEntry(
       v-if="featuredProjects.length"
       :active="activeGroup === '__featured__'"
@@ -19,8 +19,9 @@ PanelMulti
       :key="activeGroup"
       :title="activeGroup === '__featured__' ? featured : toTitleCase(activeGroup)"
       :label="projectCount(groupProjects.length)"
-      overlay
+      :depth="1"
       storageKey="panel:projects-list"
+      @back="selectGroup(activeGroup)"
     )
       PanelEntry(
         v-for="project in groupProjects"
@@ -31,7 +32,7 @@ PanelMulti
         @select="selectItem(project)"
       ) {{ project.title }}
 
-  transition(name="panel" mode="out-in")
+  transition(name="panel")
     PanelDetail(
       v-if="selectedItem"
       :key="selectedItem.path"

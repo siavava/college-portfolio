@@ -3,6 +3,11 @@
   slot
 </template>
 
+<script lang="ts" setup>
+const context = useMultiPanelLayout()
+provide(PANEL_LAYOUT_KEY, context)
+</script>
+
 <style lang="sass">
 // Non-scoped: these classes are used by child panel components
 
@@ -23,6 +28,7 @@
 
 .panel-leave-active
   transition: opacity 0.15s ease, transform 0.15s ease
+  pointer-events: none
 
 .panel-enter-from
   opacity: 0

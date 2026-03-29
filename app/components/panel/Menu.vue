@@ -1,12 +1,14 @@
 <template lang="pug">
 .panel.panel-menu.panel-border.no-select(
-  :class="{ overlay, dragging: resizable?.isDragging.value }"
+  v-show="visible"
+  :class="{ dragging: resizable?.isDragging.value, stacked: isStacked }"
   :style="panelStyle"
 )
   .resize-handle(
     v-if="resizable"
     @pointerdown="resizable.onPointerDown"
   )
+  button.panel-menu-close.no-select(v-if="showClose" @click="$emit('back')") &times;
   .panel-menu-header
     span.panel-menu-label(v-if="label") {{ label }}
     h2.panel-menu-title {{ title }}
@@ -18,22 +20,76 @@
 const props = withDefaults(defineProps<{
   title: string
   label?: string
-  overlay?: boolean
+  depth?: number
   storageKey?: string
 }>(), {
-  overlay: false,
+  depth: 0,
 })
+
+defineEmits<{
+  back: []
+}>()
+
+const panelId = props.storageKey || `panel-depth-${props.depth}`
+const DEFAULT_WIDTH = 280
 
 const resizable = props.storageKey
   ? useResizablePanel({ key: props.storageKey })
   : null
 
+const currentWidth = computed(() => resizable ? resizable.width.value : DEFAULT_WIDTH)
+
+// Register with Multi.vue layout context
+const context = inject(PANEL_LAYOUT_KEY, null)
+
+onMounted(() => {
+  context?.register({ id: panelId, depth: props.depth, width: currentWidth.value })
+})
+
+// Keep registration width in sync when user resizes
+if (resizable) {
+  watch(() => resizable.width.value, (newWidth) => {
+    context?.updateWidth(panelId, newWidth)
+  })
+}
+
+onUnmounted(() => {
+  context?.unregister(panelId)
+})
+
+const isStacked = computed(() => context?.isStacked.value ?? false)
+
+const visible = computed(() => {
+  if (!context) return true
+  if (isStacked.value) {
+    // In stacked mode, only show the deepest registered menu
+    const all = context.panels.value
+    const maxDepth = Math.max(...all.map(p => p.depth))
+    return props.depth === maxDepth
+  }
+  return context.visibleIds.value.has(panelId)
+})
+
+const showClose = computed(() => {
+  if (!context || props.depth === 0) return false
+  // Show close button when parent is hidden (collapsed) or in stacked mode
+  if (isStacked.value) return true
+  return context.panels.value.some(
+    p => p.depth < props.depth && !context.visibleIds.value.has(p.id)
+  )
+})
+
 const mounted = ref(false)
 onMounted(() => { mounted.value = true })
 
 const panelStyle = computed(() => {
-  if (!resizable || !mounted.value) return undefined
-  return { width: `${resizable.width.value}px` }
+  const style: Record<string, string> = {}
+  if (resizable && mounted.value) {
+    style.width = `${resizable.width.value}px`
+  }
+  // Each depth level gets a higher z-index so deeper panels paint on top
+  style['z-index'] = String(10 + props.depth)
+  return style
 })
 </script>
 
@@ -44,24 +100,33 @@ const panelStyle = computed(() => {
   width: 280px
   padding: 40px 32px
   position: relative
+  background: var(--background)
 
-  &.overlay
-    @media screen and (max-width: 1100px)
-      position: fixed
-      top: 0
-      left: 256px
-      bottom: 45px
-      background: var(--background)
-      z-index: 20
-      overflow-y: auto
-
-    @media screen and (max-width: 768px)
-      left: 0
-      top: 60px
+  &.stacked
+    width: 100% !important
+    padding: 40px 20px
 
   @media screen and (max-width: 768px)
     width: 100% !important
     padding: 40px 20px
+
+.panel-menu-close
+  position: absolute
+  top: 40px
+  right: 20px
+  background: none
+  border: none
+  font-size: 22px
+  color: var(--foreground)
+  cursor: pointer
+  opacity: 0.4
+  transition: opacity 0.2s ease
+  line-height: 1
+  padding: 8px
+  z-index: 1
+
+  &:hover
+    opacity: 1
 
 .resize-handle
   position: absolute
@@ -88,6 +153,7 @@ const panelStyle = computed(() => {
 
 .panel-menu-label
   display: block
+  width: fit-content
   font-family: typography.font("sans-serif"), sans-serif
   font-size: 10px
   text-transform: uppercase

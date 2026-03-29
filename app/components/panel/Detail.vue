@@ -1,5 +1,5 @@
 <template lang="pug">
-.panel.panel-detail
+.panel.panel-detail(:class="{ stacked: isStacked }")
   button.close-btn.no-select(@click="$emit('close')") &times;
   slot
 </template>
@@ -8,6 +8,9 @@
 defineEmits<{
   close: []
 }>()
+
+const context = inject(PANEL_LAYOUT_KEY, null)
+const isStacked = computed(() => context?.isStacked.value ?? false)
 </script>
 
 <style lang="sass" scoped>
@@ -20,10 +23,12 @@ defineEmits<{
   max-height: 100vh
   position: sticky
   top: 0
-  max-width: 720px
+  max-width: 65ch
   min-width: 400px
+  z-index: 20
+  background: var(--background)
 
-  @media screen and (max-width: 1100px)
+  &.stacked
     position: fixed
     top: 0
     left: 256px
@@ -31,14 +36,17 @@ defineEmits<{
     bottom: 45px
     background: var(--background)
     z-index: 30
-    overflow-y: auto
     max-width: none
     min-width: 0
 
   @media screen and (max-width: 768px)
-    left: 0
-    top: 60px
     padding: 48px 24px
+    min-width: 0
+    max-width: none
+
+    &.stacked
+      left: 0
+      top: 60px
 
 .close-btn
   position: absolute
@@ -65,6 +73,7 @@ defineEmits<{
   letter-spacing: 0.06em
   color: var(--foreground)
   opacity: 0.5
+  width: fit-content
   margin-bottom: 6px
 
 :deep(.detail-title)
@@ -79,5 +88,5 @@ defineEmits<{
   font-family: typography.font("serif"), serif
   font-size: typography.font-size("m")
   line-height: 1.7
-  color: var(--light-foreground)
+  color: var(--foreground)
 </style>
