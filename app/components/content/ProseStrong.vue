@@ -1,6 +1,4 @@
-<template>
-  <H>
-    <slot />
-  </H>
+<template lang="pug">
+H
+  slot
 </template>
-

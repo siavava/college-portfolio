@@ -1,35 +1,16 @@
-<template>
-  <footer class="styled-footer">
-    <div class="footer-inner">
-      <div class="left-section">
-        <span class="copyright">&copy; amittai {{ new Date().getFullYear() }}.</span>
-      </div>
-      <div class="right-section">
-        <div
-          class="clock"
-          @click="toggleTimeInfo"
-        >
-          <div class="clock-face">
-            <div
-              ref="hourHand"
-              class="hand hour-hand"
-            />
-            <div
-              ref="minuteHand"
-              class="hand min-hand"
-            />
-            <div
-              ref="secondHand"
-              class="hand second-hand"
-            />
-          </div>
-        </div>
-        <div id="clock-info" :class="{ visible: timeInfoVisible }">
-          <span ref="timeZoneElement" />
-        </div>
-      </div>
-    </div>
-  </footer>
+<template lang="pug">
+footer.styled-footer
+  .footer-inner
+    .left-section
+      span.copyright &copy; amittai {{ new Date().getFullYear() }}.
+    .right-section
+      .clock(@click="toggleTimeInfo")
+        .clock-face
+          .hand.hour-hand(ref="hourHand")
+          .hand.min-hand(ref="minuteHand")
+          .hand.second-hand(ref="secondHand")
+      #clock-info(:class="{ visible: timeInfoVisible }")
+        span(ref="timeZoneElement")
 </template>
 
 <script setup lang="ts">

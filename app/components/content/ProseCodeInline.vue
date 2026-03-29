@@ -1,5 +1,6 @@
-<template>
-  <code><slot /></code>
+<template lang="pug">
+code
+  slot
 </template>
 
 <style lang="sass" scoped>

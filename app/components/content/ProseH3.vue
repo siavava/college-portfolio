@@ -1,35 +1,10 @@
-<template>
-  <ProseA
-    v-if="generate && id"
-    :to="`#${id}`"
-    class="prose-title-wrapper"
-    :underline="false"
-  >
-    <h3
-      :id="id"
-      :class="{
-        'prose-h3': true,
-        'bold': bold,
-      }"
-    >
-      <slot />
-    </h3>
-  </ProseA>
-  <div
-    v-else
-    class="prose-title-wrapper"
-  >
-    <h3
-      :id="id"
-      :class="{
-        'prose-h3': true,
-        'bold': bold,
-      }"
-    >
-      <slot />
-    </h3>
-    <!-- <br> -->
-  </div>
+<template lang="pug">
+ProseA.prose-title-wrapper(v-if="generate && id" :to="`#${id}`" :underline="false")
+  h3(:id="id" :class="{ 'prose-h3': true, 'bold': bold }")
+    slot
+div.prose-title-wrapper(v-else)
+  h3(:id="id" :class="{ 'prose-h3': true, 'bold': bold }")
+    slot
 </template>
 
 <script setup lang="ts">

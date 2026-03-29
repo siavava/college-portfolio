@@ -1,14 +1,10 @@
-<template>
-  <div class="dictionary-page">
-    <h1 class="word">{{ profile.name }}</h1>
-    <div class="pronunciation">{{ profile.pronunciation }}</div>
-
-    <div class="part-of-speech">{{ profile.partOfSpeech }}</div>
-
-    <div class="definitions">
-      <ContentRenderer :value="profile" />
-    </div>
-  </div>
+<template lang="pug">
+.dictionary-page
+  h1.word {{ profile.name }}
+  .pronunciation {{ profile.pronunciation }}
+  .part-of-speech {{ profile.partOfSpeech }}
+  .definitions
+    ContentRenderer(:value="profile")
 </template>
 
 <script lang="ts" setup>

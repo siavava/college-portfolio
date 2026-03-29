@@ -1,39 +1,14 @@
-<template>
-  <section>
-    <h4 class="section-heading" id="contact">
-      Contact
-    </h4>
-    <div class="contacts-list">
-      <div
-        v-for="link, i in contact.links"
-        :key="i"
-        class="contact-item"
-      >
-        <div class="contact-name">
-          {{ link.name }}
-        </div>
-        <div class="contact-value">
-          <hr class="separator" />
-          <ProseA
-            v-if="link.url"
-            :href="link.url"
-            class="link"
-            fancy
-          >
-            <span>
-              {{ link.username }}
-            </span>
-          </ProseA>
-          <span
-            v-else
-            class="link"
-          >
-            {{ link.username }}
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
+<template lang="pug">
+section
+  h4.section-heading#contact Contact
+  .contacts-list
+    .contact-item(v-for="link, i in contact.links" :key="i")
+      .contact-name {{ link.name }}
+      .contact-value
+        hr.separator
+        ProseA.link(v-if="link.url" :href="link.url" fancy)
+          span {{ link.username }}
+        span.link(v-else) {{ link.username }}
 </template>
 
 <script lang="ts" setup>

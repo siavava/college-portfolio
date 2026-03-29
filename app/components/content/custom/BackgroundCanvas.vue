@@ -1,5 +1,5 @@
-<template>
-  <canvas ref="backgroundCanvas" class="background-canvas" />
+<template lang="pug">
+canvas.background-canvas(ref="backgroundCanvas")
 </template>
 
 <script lang="ts" setup>
@@ -33,19 +33,12 @@ onMounted(() => {
     gradient.addColorStop(0, `hsl(${Math.sin(gradientPosition) * 360}, 20%, 50%)`);
     gradient.addColorStop(1, `hsl(${Math.cos(gradientPosition) * 360}, 20%, 50%)`);
 
-    // rotate the gradient
-
-    // gradient.addColorStop(0.25, `#dad4ec`)
-    // gradient.addColorStop(0.5, `#f3e7e9`)
-
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
     requestAnimationFrame(draw);
   }
 
-
-  
   draw()
 })
 </script>
@@ -64,10 +57,8 @@ canvas
   height: 100%
   z-index: -1
 
-
   display: block
   --hue-rotate: 80deg
-
 
   position: fixed
   top: 0
@@ -76,16 +67,13 @@ canvas
   -webkit-filter: brightness(200%) hue-rotate(var(--hue-rotate))
   filter: brightness(200%) hue-rotate(var(--hue-rotate))
 
-
   -webkit-animation: shader-pulse 2s linear infinite
   animation: shader-pulse 2s linear infinite
 
   transition: opacity 0.3s ease
 
-  // :is(.one-mode, .three-mode) &
   display: none
 
   @media screen and (max-width: 960px)
     opacity: 0
-  
 </style>

@@ -1,5 +1,5 @@
-<template>
-  <GitHubIcon />
+<template lang="pug">
+GitHubIcon
 </template>
 
 <script lang="ts">

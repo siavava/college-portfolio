@@ -1,18 +1,11 @@
-<template>
-  <div
-    class="panel-entry"
-    :class="{ active, compact }"
-    @click="$emit('select')"
-  >
-    <div class="panel-entry-row">
-      <span class="panel-entry-indicator" v-if="active">&rsaquo;</span>
-      <span class="panel-entry-title">
-        <slot />
-        <span class="panel-entry-arrow">&#8599;</span>
-      </span>
-    </div>
-    <div v-if="meta" class="panel-entry-meta">{{ meta }}</div>
-  </div>
+<template lang="pug">
+.panel-entry(:class="{ active, compact }" @click="$emit('select')")
+  .panel-entry-row
+    span.panel-entry-indicator(v-if="active") &rsaquo;
+    span.panel-entry-title
+      slot
+      span.panel-entry-arrow &#8599;
+  .panel-entry-meta(v-if="meta") {{ meta }}
 </template>
 
 <script lang="ts" setup>

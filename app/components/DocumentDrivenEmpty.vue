@@ -1,14 +1,8 @@
-<template>
-  <section class="not-found">
-    <div class="container">
-      <div class="error-code">
-        403
-      </div>
-      <p class="error-message">
-        This page has not been published.
-      </p>
-    </div>
-  </section>
+<template lang="pug">
+section.not-found
+  .container
+    .error-code 403
+    p.error-message This page has not been published.
 </template>
 
 <script lang="ts">
@@ -42,7 +36,6 @@ section.not-found
     border-right: 1px solid var(--dark-foreground)
 
   .error-message
-    //font-weight: 600
     color: var(--foreground)
     line-height: 5rem
 </style>

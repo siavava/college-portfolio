@@ -1,10 +1,10 @@
-<template>
-  <ol class="prose-ol">
-    <slot />
-  </ol>
+<template lang="pug">
+ol.prose-ol
+  slot
 </template>
 
 <style lang="sass">
+@use "@/styles/typography"
 
 .prose-ol
   counter-reset: ol-count
@@ -17,6 +17,10 @@
 
     &::before
       content: counter(ol-count) '.'
+      font-family: typography.font("sans-serif"), sans-serif
       position: absolute
-      left: 0
+      font-size: 0.8em
+      line-height: 2
+      left: 10px
+      color: var(--dark-foreground)
 </style>

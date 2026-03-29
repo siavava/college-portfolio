@@ -1,14 +1,7 @@
-<template>
-  <section class="about">
-    <h4 class="section-heading" id="about">
-      About
-    </h4>
-
-    <ContentRenderer
-      :value="profile"
-      class="about-content"
-    />
-  </section>
+<template lang="pug">
+section.about
+  h4.section-heading#about About
+  ContentRenderer.about-content(:value="profile")
 </template>
 
 <script lang="ts" setup>

@@ -1,7 +1,6 @@
-<template>
-  <table class="prose-table">
-    <slot />
-  </table>
+<template lang="pug">
+table.prose-table
+  slot
 </template>
 
 <style lang="sass">

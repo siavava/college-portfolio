@@ -1,57 +1,49 @@
-<template>
-  <PanelMulti>
-    <PanelNav :title="title" :subtitle="subtitle">
-      <PanelEntry
-        :active="activeGroup === 'work'"
-        @select="selectGroup('work')"
-      >{{ workLabel }}</PanelEntry>
-      <PanelEntry
-        :active="activeGroup === 'education'"
-        @select="selectGroup('education')"
-      >{{ educationLabel }}</PanelEntry>
-    </PanelNav>
+<template lang="pug">
+PanelMulti
+  PanelMenu(:title="title" :label="subtitle")
+    PanelEntry(
+      :active="activeGroup === 'work'"
+      @select="selectGroup('work')"
+    ) {{ workLabel }}
+    PanelEntry(
+      :active="activeGroup === 'education'"
+      @select="selectGroup('education')"
+    ) {{ educationLabel }}
 
-    <transition name="panel" mode="out-in">
-      <PanelList
-        v-if="activeGroup"
-        :key="activeGroup"
-        :title="activeGroup === 'work' ? workLabel : educationLabel"
-        :count="entryCount(groupEntries.length)"
-      >
-        <PanelEntry
-          v-for="entry in groupEntries"
-          :key="entry.path"
-          :active="selectedItem?.path === entry.path"
-          :meta="`${entry.start} \u2014 ${entry.end}`"
-          compact
-          @select="selectItem(entry)"
-        >{{ entry.title }} at {{ entry.company || entry.school }}</PanelEntry>
-      </PanelList>
-    </transition>
+  transition(name="panel" mode="out-in")
+    PanelMenu(
+      v-if="activeGroup"
+      :key="activeGroup"
+      :title="activeGroup === 'work' ? workLabel : educationLabel"
+      :label="entryCount(groupEntries.length)"
+      overlay
+    )
+      PanelEntry(
+        v-for="entry in groupEntries"
+        :key="entry.path"
+        :active="selectedItem?.path === entry.path"
+        :meta="`${entry.start} \u2014 ${entry.end}`"
+        compact
+        @select="selectItem(entry)"
+      ) {{ entry.title }} at {{ entry.company || entry.school }}
 
-    <transition name="panel" mode="out-in">
-      <PanelDetail
-        v-if="selectedItem"
-        :key="selectedItem.path"
-        @close="selectedItem = null"
-      >
-        <div class="detail-date">{{ selectedItem.start }} &mdash; {{ selectedItem.end }}</div>
-        <h2 class="detail-title">{{ selectedItem.title }}</h2>
-        <div class="detail-org">
-          <a
-            :href="selectedItem.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="org-link"
-          >{{ selectedItem.company || selectedItem.school }}</a>
-          <span v-if="selectedItem.location" class="detail-location">&middot; {{ selectedItem.location }}</span>
-        </div>
-        <div class="detail-body">
-          <ContentRenderer :value="selectedItem" />
-        </div>
-      </PanelDetail>
-    </transition>
-  </PanelMulti>
+  transition(name="panel" mode="out-in")
+    PanelDetail(
+      v-if="selectedItem"
+      :key="selectedItem.path"
+      @close="selectedItem = null"
+    )
+      .detail-date {{ selectedItem.start }} &mdash; {{ selectedItem.end }}
+      h2.detail-title {{ selectedItem.title }}
+      .detail-org
+        a.org-link(
+          :href="selectedItem.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        ) {{ selectedItem.company || selectedItem.school }}
+        span.detail-location(v-if="selectedItem.location") &middot; {{ selectedItem.location }}
+      .detail-body
+        ContentRenderer(:value="selectedItem")
 </template>
 
 <script lang="ts" setup>

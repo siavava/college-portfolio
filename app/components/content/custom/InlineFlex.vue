@@ -1,13 +1,9 @@
-<template>
-  <div
-    class="inline-flex-div"
-  >
-    <slot />
-  </div>
+<template lang="pug">
+.inline-flex-div
+  slot
 </template>
-<script setup lang="ts">
 
-// define props
+<script setup lang="ts">
 defineProps({
   justify: {
     type: String,
@@ -19,6 +15,7 @@ defineProps({
   },
 })
 </script>
+
 <style lang="sass" scoped>
 .inline-flex-div
   width: 100%

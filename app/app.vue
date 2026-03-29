@@ -1,17 +1,9 @@
-<template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+<template lang="pug">
+NuxtLayout
+  NuxtPage
 </template>
 
 <script setup lang="ts">
-// import { withoutTrailingSlash } from "ufo"
-
-// const route = useRoute()
-
-// const { data: nav } = await useAsyncData("navigation", () => fetchContentNavigation())
-// const navigation = computed(() => nav.value)
-
 useHead({
   htmlAttrs: {
     lang: "en",
@@ -21,6 +13,4 @@ useHead({
 useServerSeoMeta({
   ogSiteName: "Amittai",
 })
-
-// provide("navigation", navigation)
 </script>

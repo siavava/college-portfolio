@@ -1,8 +1,8 @@
-<template>
-  <div class="grid">
-    <slot />
-  </div>
+<template lang="pug">
+.grid
+  slot
 </template>
+
 <style lang="sass">
 .grid
   display: grid
@@ -13,6 +13,4 @@
 
   & > *
     max-width: 40%
-
-  
 </style>

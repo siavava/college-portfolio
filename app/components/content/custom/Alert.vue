@@ -1,16 +1,8 @@
-<template>
-  <div
-    class="alert-container"
-    :class="type"
-  >
-    <div class="title-container">
-      <!-- <Icon :type="type" class="alert-icon" /> -->
-      <span class="title">
-        {{ title || type }}
-      </span>
-    </div>
-    <slot id="alert-content" />
-  </div>
+<template lang="pug">
+.alert-container(:class="type")
+  .title-container
+    span.title {{ title || type }}
+  slot(id="alert-content")
 </template>
 
 <script lang="ts">
@@ -38,21 +30,12 @@ export default {
 
 .alert-container
 
-  // @each $name, $value in colors.$dark-palette
-  //   --#{$name}: #{rgba(red($value), green($value), blue($value), alpha($value))}
-
   margin: 1em 0
   padding: 1rem
   border-radius: 0.5rem
   position: relative
 
-  // border: 0.5px solid transparent // var(--border-color)
   border: 0.5px solid var(--border-color)
-
-  // filter brightness
-  // :is(.three-mode, .four-mode, .five-mode, .six-mode) &
-  //   filter: brightness(0.8)
-  //   opacity: 0.7
 
   .prose-ul
     font-size: inherit !important

@@ -1,12 +1,8 @@
-<template>
-  <section class="hero-section">
-    <div class="dictionary-entry">
-      <h1 class="word">{{ profile.name }}</h1>
-      <div class="pronunciation" v-if="profile.pronunciation">
-        {{ profile.pronunciation }}
-      </div>
-    </div>
-  </section>
+<template lang="pug">
+section.hero-section
+  .dictionary-entry
+    h1.word {{ profile.name }}
+    .pronunciation(v-if="profile.pronunciation") {{ profile.pronunciation }}
 </template>
 
 <script lang="ts" setup>

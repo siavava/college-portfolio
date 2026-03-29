@@ -1,40 +1,18 @@
-<template>
-  <section class="education">
-    <h4 class="section-heading" id="education">
-      Education
-    </h4>
-    <div class="entries">
-      <div
-        v-for="experience, i in experiences"
-        :key="i"
-        class="entry"
-      >
-        <div class="entry-date">
-          <span>{{ experience.start }}</span>
-          <span> &mdash; </span>
-          <span>{{ experience.end }}</span>
-        </div>
-        <div class="entry-content">
-          <h3 class="entry-title">
-            <ProseA
-              :href="experience.url"
-              fancy
-              bold
-            >
-              {{ experience.title }}
-              <span class="entry-org">
-                at {{ experience.school }}
-              </span>
-            </ProseA>
-          </h3>
-          <ContentRenderer
-            class="entry-description"
-            :value="experience"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
+<template lang="pug">
+section.education
+  h4.section-heading#education Education
+  .entries
+    .entry(v-for="experience, i in experiences" :key="i")
+      .entry-date
+        span {{ experience.start }}
+        span  &mdash;
+        span {{ experience.end }}
+      .entry-content
+        h3.entry-title
+          ProseA(:href="experience.url" fancy bold)
+            | {{ experience.title }}
+            span.entry-org  at {{ experience.school }}
+        ContentRenderer.entry-description(:value="experience")
 </template>
 
 <script setup lang="ts">

@@ -1,14 +1,11 @@
-<template>
-  <header class="app-header">
-    <nav class="nav-links">
-      <NuxtLink to="/" class="nav-link" :class="{ active: route.path === '/' }">About</NuxtLink>
-      <NuxtLink to="/archive" class="nav-link" :class="{ active: route.path === '/archive' }">Projects</NuxtLink>
-      <NuxtLink to="https://amittai.space" class="nav-link" target="_blank" rel="noopener noreferrer">Writing</NuxtLink>
-    </nav>
-    <div class="nav-actions">
-      <Actions />
-    </div>
-  </header>
+<template lang="pug">
+header.app-header
+  nav.nav-links
+    NuxtLink.nav-link(to="/" :class="{ active: route.path === '/' }") About
+    NuxtLink.nav-link(to="/archive" :class="{ active: route.path === '/archive' }") Projects
+    NuxtLink.nav-link(to="https://amittai.space" target="_blank" rel="noopener noreferrer") Writing
+  .nav-actions
+    Actions
 </template>
 
 <script lang="ts" setup>

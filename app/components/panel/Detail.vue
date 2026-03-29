@@ -1,8 +1,7 @@
-<template>
-  <div class="panel panel-detail">
-    <button class="close-btn" @click="$emit('close')">&times;</button>
-    <slot />
-  </div>
+<template lang="pug">
+.panel.panel-detail
+  button.close-btn(@click="$emit('close')") &times;
+  slot
 </template>
 
 <script lang="ts" setup>
@@ -16,7 +15,7 @@ defineEmits<{
 
 .panel-detail
   flex: 1
-  padding: 60px 48px
+  padding: 40px 48px
   overflow-y: auto
   max-height: 100vh
   position: sticky

@@ -4,6 +4,11 @@
   "includes": [
     "types/*.d.ts",
   ],
+  "vueCompilerOptions": {
+    "plugins": [
+      "@vue/language-plugin-pug"
+    ]
+  },
   "compilerOptions": {
     // ...
     "sourceMap": true,

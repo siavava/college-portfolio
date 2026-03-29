@@ -1,10 +1,6 @@
-<template>
-  <h5
-    :id="id"
-    class="prose-h5"
-  >
-    <slot />
-  </h5>
+<template lang="pug">
+h5.prose-h5(:id="id")
+  slot
 </template>
 
 <script setup lang="ts">

@@ -1,30 +1,11 @@
-<template>
-  <div class="prose-h2-container">
-    <!-- <ProseHr /> -->
-    <NuxtLink
-      v-if="generate && id"
-      :to="`#${id}`"
-      class="prose-title-wrapper"
-    >
-      <h2
-        :id="id"
-        class="prose-h2"
-      >
-        <slot />
-      </h2>
-    </NuxtLink>
-    <div
-      v-else
-      class="prose-title-wrapper"
-    >
-      <h2
-        :id="id"
-        class="prose-h2"
-      >
-        <slot />
-      </h2>
-    </div>
-  </div>
+<template lang="pug">
+.prose-h2-container
+  NuxtLink.prose-title-wrapper(v-if="generate && id" :to="`#${id}`")
+    h2.prose-h2(:id="id")
+      slot
+  .prose-title-wrapper(v-else)
+    h2.prose-h2(:id="id")
+      slot
 </template>
 
 <script setup lang="ts">

@@ -1,14 +1,11 @@
-<template>
-  <div id="styled-image">
-    <div class="wrapper">
-      <NuxtImg
-        src="profile/head-shot.jpg"
-        class="img"
-        alt="head shot"
-        loading="lazy"
-      />
-    </div>
-  </div>
+<template lang="pug">
+#styled-image
+  .wrapper
+    NuxtImg.img(
+      src="profile/head-shot.jpg"
+      alt="head shot"
+      loading="lazy"
+    )
 </template>
 
 <script lang="ts">

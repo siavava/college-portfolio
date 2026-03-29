@@ -4,7 +4,9 @@
       "Bash(head -30 /Users/siavava/workspace/web/portfolio/content/profile/brief/*.md)",
       "Bash(head -30 /Users/siavava/workspace/web/portfolio/content/jobs/01-compsight/*.md)",
       "Bash(head -40 /Users/siavava/workspace/web/portfolio/content/profile/contact/*.md)",
-      "WebFetch(domain:www.floguo.com)"
+      "WebFetch(domain:www.floguo.com)",
+      "Bash(find /Users/siavava/workspace/web/blog -maxdepth 2 -name vite.config.* -o -name tsconfig.json)",
+      "Bash(curl -s http://localhost:3333/projects)"
     ]
   }
 }

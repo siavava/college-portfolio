@@ -1,7 +1,6 @@
-<template>
-  <span class="h-slot">
-    <slot />
-  </span>
+<template lang="pug">
+span.h-slot
+  slot
 </template>
 
 <style lang="sass" scoped>

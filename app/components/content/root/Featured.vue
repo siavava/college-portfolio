@@ -1,83 +1,25 @@
-<template>
-  <section id="projects">
-    <h4 class="section-heading" id="projects">
-      Featured Projects
-    </h4>
-    <div class="projects-list">
-      <div
-        v-for="project, i in projects"
-        :key="i"
-        class="project"
-      >
-        <div class="project-date">
-          {{
-            new Date(project.date)
-              .toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "numeric",
-              })
-          }}
-        </div>
-        <div class="project-content">
-          <div>
-            <h3 class="project-title">
-              <ProseA
-                v-if="project?.url"
-                :href="project.url"
-                fancy
-                bold
-              >
-                {{ project.title }}
-              </ProseA>
-              <span v-else>
-                {{ project.title }}
-              </span>
-            </h3>
-            <div class="project-description">
-              <ContentRenderer :value="project" />
-            </div>
-          </div>
-          <div class="project-footer">
-            <div class="project-links">
-              <NuxtLink
-                v-if="project.repo"
-                :to="project.repo"
-                aria-label="GitHub Link"
-                class="link"
-              >
-                <Icon type="GitHub" />
-              </NuxtLink>
-            </div>
-            <ul
-              v-if="project.tech"
-              class="project-tech-list"
-            >
-              <li
-                v-for="(tech, techIndex) in project?.tech"
-                :key="techIndex"
-                class="project-tech-item"
-              >
-                <StyledButton
-                  id="tech-link"
-                  href=""
-                >
-                  {{ tech }}
-                </StyledButton>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="archive-link" v-if="archive">
-      <ProseA
-        href="/archive"
-        fancy
-      >
-        view all projects &#8599;
-      </ProseA>
-    </div>
-  </section>
+<template lang="pug">
+section#projects
+  h4.section-heading#projects Featured Projects
+  .projects-list
+    .project(v-for="project, i in projects" :key="i")
+      .project-date {{ new Date(project.date).toLocaleDateString("en-US", { year: "numeric", month: "numeric" }) }}
+      .project-content
+        div
+          h3.project-title
+            ProseA(v-if="project?.url" :href="project.url" fancy bold) {{ project.title }}
+            span(v-else) {{ project.title }}
+          .project-description
+            ContentRenderer(:value="project")
+        .project-footer
+          .project-links
+            NuxtLink.link(v-if="project.repo" :to="project.repo" aria-label="GitHub Link")
+              Icon(type="GitHub")
+          ul.project-tech-list(v-if="project.tech")
+            li.project-tech-item(v-for="(tech, techIndex) in project?.tech" :key="techIndex")
+              StyledButton#tech-link(href="") {{ tech }}
+  .archive-link(v-if="archive")
+    ProseA(href="/archive" fancy) view all projects &#8599;
 </template>
 
 <script lang="ts">

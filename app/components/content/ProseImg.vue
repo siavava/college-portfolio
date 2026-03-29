@@ -1,22 +1,14 @@
-<template>
-  <figure class="prose-img-wrapper">
-    <NuxtImg
-      class="prose-img"
-      :src="refinedSrc"
-      :alt="alt"
-      :width="width"
-      :height="height"
-      loading="lazy"
-      format="avif,webp"
-    />
-    <caption
-      v-if="alt"
-      class="prose-img-alt"
-      v-html="alt"
-    />
-    <!-- {{ alt }}
-    </caption> -->
-  </figure>
+<template lang="pug">
+figure.prose-img-wrapper
+  NuxtImg.prose-img(
+    :src="refinedSrc"
+    :alt="alt"
+    :width="width"
+    :height="height"
+    loading="lazy"
+    format="avif,webp"
+  )
+  caption.prose-img-alt(v-if="alt" v-html="alt")
 </template>
 
 <script setup lang="ts">

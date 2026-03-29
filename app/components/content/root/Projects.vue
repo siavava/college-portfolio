@@ -1,189 +1,55 @@
-<template>
-  <section id="projects">
-    <h2 class="archive-title" id="projects">
-      Projects Archive
-    </h2>
+<template lang="pug">
+section#projects
+  h2.archive-title#projects Projects Archive
 
-    <div class="project-category">
-      <h4 class="category-title" id="featured">
-        Featured
-      </h4>
-    <div
-      v-for="project, i in featuredProjects"
-      :key="i"
-      class="project"
-    >
-    <div class="range">
-      {{
-        new Date(project.date)
-          .toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "numeric",
-          })
-      }}
-    </div>
-      <div class="project-content">
-        <div>
-        <ProseH2 bold>
-          <ProseA
-            v-if="project?.url"
-            :href="project.url"
-            fancy bold
-          >
-            {{ project.title }}
-          </ProseA>
-          <span v-else>
-            {{ project.title }}
-          </span>
-        </ProseH2>
-          <!-- <template v-if="hasCompany(project)">
-            <span
-              v-if="hasCompany(project)"
-              class="project-company"
-            >
-              &nbsp;@&nbsp;
-            </span>
-            <NuxtLink
-              v-if="project.company.url"
-              :to="project.company.url"
-            >
-              {{ project.company.name }}
-            </NuxtLink>
-          </template> -->
-          <div class="project-description">
-            <ContentRenderer :value="project" />
-          </div>
-        </div>
-        <div class="project-footer">
-          <div class="project-links">
-            <NuxtLink
-              v-if="project.repo"
-              :to="project.repo"
-              aria-label="GitHub Link"
-              class="link"
-            >
-              <Icon type="GitHub" />
-            </NuxtLink>
-          </div>
-          <ul
-            v-if="project.tech"
-            class="project-tech-list"
-          >
-            <li
-              v-for="(tech, techIndex) in project?.tech"
-              :key="techIndex"
-              class="project-tech-item"
-            >
-              <!-- {{ tech }} -->
-              <StyledButton
-                id="tech-link"
-                href=""
-              >
-                {{ tech }}
-              </StyledButton>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    </div>
+  .project-category
+    h4.category-title#featured Featured
+    .project(v-for="project, i in featuredProjects" :key="i")
+      .range {{ new Date(project.date).toLocaleDateString("en-US", { year: "numeric", month: "numeric" }) }}
+      .project-content
+        div
+          ProseH2(bold)
+            ProseA(v-if="project?.url" :href="project.url" fancy bold) {{ project.title }}
+            span(v-else) {{ project.title }}
+          .project-description
+            ContentRenderer(:value="project")
+        .project-footer
+          .project-links
+            NuxtLink.link(v-if="project.repo" :to="project.repo" aria-label="GitHub Link")
+              Icon(type="GitHub")
+          ul.project-tech-list(v-if="project.tech")
+            li.project-tech-item(v-for="(tech, techIndex) in project?.tech" :key="techIndex")
+              StyledButton#tech-link(href="") {{ tech }}
 
-
-    <div
-      v-for="category, index in sortedCategories"
-      :key="index"
-      class="project-category"
-    >
-      <!-- <div class="category-title" :id="category[0].replace(' ', '-')">
-        {{ category[0] }}
-      </div> -->
-      <h4 class="category-title" :id="category[0].replace(' ', '-')">
-        {{ category[0] }}
-      </h4>
-      <div
-        v-for="project, i in category[1]"
-        :key="i"
-        class="project"
-      >
-        <div class="range">
-          {{
-            new Date(project.date)
-              .toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "numeric",
-              })
-          }}
-        </div>
-        <div class="project-content">
-          <div>
-            <ProseH2 bold>
-              <ProseA
-                v-if="project?.url"
-                :href="project.url"
-                fancy bold
-              >
-                {{ project.title }}
-              </ProseA>
-              <span v-else>
-                {{ project.title }}
-              </span>
-            </ProseH2>
-            <template v-if="hasCompany(project)">
-              <span
-                v-if="hasCompany(project)"
-                class="project-company"
-              >
-                &nbsp;@&nbsp;
-              </span>
-              <NuxtLink
-                v-if="project.company.url"
-                :to="project.company.url"
-              >
-                {{ project.company.name }}
-              </NuxtLink>
-            </template>
-            <div class="project-description">
-              <ContentRenderer :value="project" />
-            </div>
-          </div>
-          <div class="project-footer">
-            <div class="project-links">
-              <NuxtLink
-                v-if="project.repo"
-                :to="project.repo"
-                aria-label="GitHub Link"
-                class="link"
-              >
-                <Icon type="GitHub" />
-              </NuxtLink>
-            </div>
-            <ul
-              v-if="project.tech"
-              class="project-tech-list"
-            >
-              <li
-                v-for="(tech, techIndex) in project?.tech"
-                :key="techIndex"
-                class="project-tech-item"
-              >
-                <StyledButton
-                  id="tech-link"
-                >
-                  {{ tech }}
-                </StyledButton>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  .project-category(v-for="category, index in sortedCategories" :key="index")
+    h4.category-title(:id="category[0].replace(' ', '-')") {{ category[0] }}
+    .project(v-for="project, i in category[1]" :key="i")
+      .range {{ new Date(project.date).toLocaleDateString("en-US", { year: "numeric", month: "numeric" }) }}
+      .project-content
+        div
+          ProseH2(bold)
+            ProseA(v-if="project?.url" :href="project.url" fancy bold) {{ project.title }}
+            span(v-else) {{ project.title }}
+          // template(v-if="hasCompany(project)")
+            span.project-company(v-if="hasCompany(project)") &nbsp;@&nbsp;
+            NuxtLink(v-if="project.company.url" :to="project.company.url") {{ project.company.name }}
+          .project-description
+            ContentRenderer(:value="project")
+        .project-footer
+          .project-links
+            NuxtLink.link(v-if="project.repo" :to="project.repo" aria-label="GitHub Link")
+              Icon(type="GitHub")
+          ul.project-tech-list(v-if="project.tech")
+            li.project-tech-item(v-for="(tech, techIndex) in project?.tech" :key="techIndex")
+              StyledButton#tech-link {{ tech }}
 </template>
 
 <script lang="ts" setup>
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
+import type { ProjectsCollectionItem } from '@nuxt/content'
+
+// // @ts-ignore
+// // eslint-disable-next-line import/no-unresolved
+// import type { MarkdownParsedContent } from "@nuxt/content/dist/runtime/types"
 
 const hasCompany = (project: any) => typeof project.company !== "undefined"
 
@@ -200,7 +66,7 @@ const { data } = await useAsyncData(
 )
 
 const _projects = data.value || []
-const categorized = new Map<string, MarkdownParsedContent[]>()
+const categorized = new Map<string, ProjectsCollectionItem[]>()
 _projects.forEach((project) => {
   const subcategory = project.tag || "misc"
   if (categorized.has(subcategory)) {
@@ -229,7 +95,6 @@ const sortedCategories = Array.from(categorized.entries()).sort(
 )
 
 // get featured projects
-// read 'featured projects' data
 const { data: featuredData } = await useAsyncData(
   "archive-all-projects-data",
   async () => {
@@ -311,10 +176,9 @@ const featuredProjects = featuredData.value || []
     .project-tech-item
       font-size: typography.font-size(xs)
 
-
       border-radius: 1em
       border: 0.5px solid var(--border-color)
-      
+
       &:not(:last-child)::after
         margin: 0 0.5em
 

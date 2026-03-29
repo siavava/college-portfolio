@@ -1,59 +1,16 @@
-<template>
-  <blockquote class="prose-blockquote">
-    <slot />
-    <div
-      v-if="author"
-      class="author"
-    >
-      <div
-        v-if="author.name"
-        class="name-links-container"
-      >
-        <ProseA
-          :to="author.link"
-          class="name-link author"
-          :fancy="!author.writing?.name"
-        >
-          <span class="author-name">
-            {{ author.name }}
-          </span>
-        </ProseA>
-        <span
-          v-if="author.writing"
-          class="writing-separator"
-        > {{ ",&nbsp;" }}</span>
-        <ProseA
-          v-if="author.writing"
-          :to="author.writing.link"
-          class="name-link writing"
-          fancy
-          bare
-        >
-          <span class="author-name">
-            {{ author.writing.name }}
-          </span>
-        </ProseA>
-      </div>
-      <div
-        v-else
-        class="name"
-      >
-        {{ author.name }}
-      </div>
-      <ul
-        v-if="tags"
-        class="tag-list"
-      >
-        <li
-          v-for="tag in tags"
-          :key="tag"
-          class="tag-item"
-        >
-          {{ tag }}
-        </li>
-      </ul>
-    </div>
-  </blockquote>
+<template lang="pug">
+blockquote.prose-blockquote
+  slot
+  .author(v-if="author")
+    .name-links-container(v-if="author.name")
+      ProseA.name-link.author(:to="author.link" :fancy="!author.writing?.name")
+        span.author-name {{ author.name }}
+      span.writing-separator(v-if="author.writing") {{ ",\u00A0" }}
+      ProseA.name-link.writing(v-if="author.writing" :to="author.writing.link" fancy bare)
+        span.author-name {{ author.writing.name }}
+    .name(v-else) {{ author.name }}
+    ul.tag-list(v-if="tags")
+      li.tag-item(v-for="tag in tags" :key="tag") {{ tag }}
 </template>
 
 <script lang="ts" setup>

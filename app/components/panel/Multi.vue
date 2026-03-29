@@ -1,7 +1,6 @@
-<template>
-  <div class="multi-panel">
-    <slot />
-  </div>
+<template lang="pug">
+.multi-panel
+  slot
 </template>
 
 <style lang="sass">

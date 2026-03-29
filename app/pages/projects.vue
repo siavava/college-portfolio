@@ -1,62 +1,61 @@
-<template>
-  <PanelMulti>
-    <PanelNav :title="title" :subtitle="subtitle">
-      <PanelEntry
-        v-if="featuredProjects.length"
-        :active="activeGroup === '__featured__'"
-        @select="selectGroup('__featured__')"
-      >{{ featured }}</PanelEntry>
-      <PanelEntry
-        v-for="[category] in sortedCategories"
-        :key="category"
-        :active="activeGroup === category"
-        @select="selectGroup(category)"
-      >{{ toTitleCase(category) }}</PanelEntry>
-    </PanelNav>
+<template lang="pug">
+PanelMulti
+  PanelMenu(:title="title" :label="subtitle")
+    PanelEntry(
+      v-if="featuredProjects.length"
+      :active="activeGroup === '__featured__'"
+      @select="selectGroup('__featured__')"
+    ) {{ featured }}
+    PanelEntry(
+      v-for="[category] in sortedCategories"
+      :key="category"
+      :active="activeGroup === category"
+      @select="selectGroup(category)"
+    ) {{ toTitleCase(category) }}
 
-    <transition name="panel" mode="out-in">
-      <PanelList
-        v-if="activeGroup"
-        :key="activeGroup"
-        :title="activeGroup === '__featured__' ? featured : toTitleCase(activeGroup)"
-        :count="projectCount(groupProjects.length)"
-      >
-        <PanelEntry
-          v-for="project in groupProjects"
-          :key="project.path"
-          :active="selectedItem?.path === project.path"
-          :meta="formatDate(project.date)"
-          compact
-          @select="selectItem(project)"
-        >{{ project.title }}</PanelEntry>
-      </PanelList>
-    </transition>
+  transition(name="panel" mode="out-in")
+    PanelMenu(
+      v-if="activeGroup"
+      :key="activeGroup"
+      :title="activeGroup === '__featured__' ? featured : toTitleCase(activeGroup)"
+      :label="projectCount(groupProjects.length)"
+      overlay
+    )
+      PanelEntry(
+        v-for="project in groupProjects"
+        :key="project.path"
+        :active="selectedItem?.path === project.path"
+        :meta="formatDate(project.date)"
+        compact
+        @select="selectItem(project)"
+      ) {{ project.title }}
 
-    <transition name="panel" mode="out-in">
-      <PanelDetail
-        v-if="selectedItem"
-        :key="selectedItem.path"
-        @close="selectedItem = null"
-      >
-        <div class="detail-date">{{ formatDate(selectedItem.date) }}</div>
-        <h2 class="detail-title">{{ selectedItem.title }}</h2>
-
-        <div class="detail-body">
-          <ContentRenderer :value="selectedItem" />
-        </div>
-
-        <div class="detail-meta" v-if="selectedItem.tech?.length || selectedItem.repo || selectedItem.url">
-          <div v-if="selectedItem.tech?.length" class="tech-list">
-            <span v-for="tech in selectedItem.tech" :key="tech" class="tech-tag">{{ tech }}</span>
-          </div>
-          <div class="detail-links">
-            <a v-if="selectedItem.repo" :href="selectedItem.repo" target="_blank" rel="noopener noreferrer" class="detail-link">GitHub &#8599;</a>
-            <a v-if="selectedItem.url" :href="selectedItem.url" target="_blank" rel="noopener noreferrer" class="detail-link">Visit &#8599;</a>
-          </div>
-        </div>
-      </PanelDetail>
-    </transition>
-  </PanelMulti>
+  transition(name="panel" mode="out-in")
+    PanelDetail(
+      v-if="selectedItem"
+      :key="selectedItem.path"
+      @close="selectedItem = null"
+    )
+      .detail-date {{ formatDate(selectedItem.date) }}
+      h2.detail-title {{ selectedItem.title }}
+      .detail-body
+        ContentRenderer(:value="selectedItem")
+      .detail-meta(v-if="selectedItem.tech?.length || selectedItem.repo || selectedItem.url")
+        .tech-list(v-if="selectedItem.tech?.length")
+          span.tech-tag(v-for="tech in selectedItem.tech" :key="tech") {{ tech }}
+        .detail-links
+          a.detail-link(
+            v-if="selectedItem.repo"
+            :href="selectedItem.repo"
+            target="_blank"
+            rel="noopener noreferrer"
+          ) GitHub &#8599;
+          a.detail-link(
+            v-if="selectedItem.url"
+            :href="selectedItem.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          ) Visit &#8599;
 </template>
 
 <script lang="ts" setup>
@@ -118,7 +117,6 @@ const toTitleCase = (str: string) => {
 <style lang="sass" scoped>
 @use "@/styles/typography"
 
-// Projects-specific detail overrides
 .detail-title
   margin-bottom: 1.5em
   padding-bottom: 1em

@@ -1,56 +1,21 @@
-<template>
-  <div id="root">
-    <aside class="sidebar">
-      <div class="ribbon" />
-      <nav class="sidebar-nav">
-        <NuxtLink
-          to="/"
-          class="nav-item"
-          :class="{ active: route.path === '/' }"
-        >
-          {{ nav.about }}
-        </NuxtLink>
-        <NuxtLink
-          to="/projects"
-          class="nav-item"
-          :class="{ active: route.path.startsWith('/projects') }"
-        >
-          {{ nav.projects }}
-        </NuxtLink>
-        <NuxtLink
-          to="/experience"
-          class="nav-item"
-          :class="{ active: route.path === '/experience' }"
-        >
-          {{ nav.experience }}
-        </NuxtLink>
-        <NuxtLink
-          :to="nav.writingUrl"
-          class="nav-item"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ nav.writing }}
-        </NuxtLink>
-      </nav>
-    </aside>
-    <div class="main-wrapper">
-      <main class="main-content">
-        <slot />
-      </main>
-      <footer class="site-footer">
-        <div class="footer-inner">
-          <span class="copyright">{{ footer.copyright(new Date().getFullYear()) }}</span>
-          <div class="footer-actions">
-            <button class="footer-link" @click="toggleColorMode">
-              {{ colorMode.preference === 'dark' ? footer.light : footer.dark }}
-            </button>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <SpeedInsights />
-  </div>
+<template lang="pug">
+#root
+  aside.sidebar
+    .ribbon
+    nav.sidebar-nav
+      NuxtLink.nav-item(to="/" :class="{ active: route.path === '/' }") {{ nav.about }}
+      NuxtLink.nav-item(to="/projects" :class="{ active: route.path.startsWith('/projects') }") {{ nav.projects }}
+      NuxtLink.nav-item(to="/experience" :class="{ active: route.path === '/experience' }") {{ nav.experience }}
+      NuxtLink.nav-item(:to="nav.writingUrl" target="_blank" rel="noopener noreferrer") {{ nav.writing }}
+  .main-wrapper
+    main.main-content
+      slot
+    footer.site-footer
+      .footer-inner
+        span.copyright {{ footer.copyright(new Date().getFullYear()) }}
+        .footer-actions
+          button.footer-link(@click="toggleColorMode") {{ colorMode.preference === 'dark' ? footer.light : footer.dark }}
+  SpeedInsights
 </template>
 
 <script lang="ts" setup>

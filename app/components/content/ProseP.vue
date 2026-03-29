@@ -1,7 +1,6 @@
-<template>
-  <p class="prose-p">
-    <slot />
-  </p>
+<template lang="pug">
+p.prose-p
+  slot
 </template>
 
 <style lang="sass" scoped>

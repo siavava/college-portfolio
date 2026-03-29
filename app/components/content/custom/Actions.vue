@@ -1,49 +1,25 @@
-<template>
-  <div class="actions-container">
-    <button
-      id="color-mode-button"
-      class="color-mode-button"
-      @click="toggleColorMode"
-      aria-label="Toggle color mode"
-    >
-      <div class="icon">
-        <svg
-          viewBox="0 0 16 16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="a"
-              x1="814.98"
-              x2="881.02"
-              y1="235.19"
-              y2="235.19"
-              gradientTransform="matrix(1.3745 0 0 1.3633 -317.33 -85.443)"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop
-                stop-color="var(--foreground)"
-                offset="0"
-              />
-              <stop
-                stop-color="var(--background)"
-                offset="1"
-              />
-            </linearGradient>
-          </defs>
-          <path
-            d="M878.98 235.19c.012 17.094-13.851 30.957-30.957 30.957s-30.969-13.863-30.957-30.957c-.012-17.094
-            13.851-30.957 30.957-30.957s30.969 13.863 30.957 30.957z"
-            color="#000000"
-            fill="url(#a)"
-            stroke="var(--foreground)"
-            stroke-width="5.6502"
-            transform="matrix(.17626 0 0 .17771 -141.52 -33.795)"
-          />
-        </svg>
-      </div>
-    </button>
-  </div>
+<template lang="pug">
+.actions-container
+  button#color-mode-button.color-mode-button(@click="toggleColorMode" aria-label="Toggle color mode")
+    .icon
+      svg(viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg")
+        defs
+          linearGradient#a(
+            x1="814.98" x2="881.02"
+            y1="235.19" y2="235.19"
+            gradientTransform="matrix(1.3745 0 0 1.3633 -317.33 -85.443)"
+            gradientUnits="userSpaceOnUse"
+          )
+            stop(stop-color="var(--foreground)" offset="0")
+            stop(stop-color="var(--background)" offset="1")
+        path(
+          d="M878.98 235.19c.012 17.094-13.851 30.957-30.957 30.957s-30.969-13.863-30.957-30.957c-.012-17.094 13.851-30.957 30.957-30.957s30.969 13.863 30.957 30.957z"
+          color="#000000"
+          fill="url(#a)"
+          stroke="var(--foreground)"
+          stroke-width="5.6502"
+          transform="matrix(.17626 0 0 .17771 -141.52 -33.795)"
+        )
 </template>
 
 <script setup>

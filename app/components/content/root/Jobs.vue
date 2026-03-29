@@ -1,40 +1,18 @@
-<template>
-  <section class="jobs">
-    <h4 class="section-heading" id="work">
-      Experience
-    </h4>
-    <div class="entries">
-      <div
-        v-for="job, i in jobs"
-        :key="i"
-        class="entry"
-      >
-        <div class="entry-date">
-          <span>{{ job.start }}</span>
-          <span> &mdash; </span>
-          <span>{{ job.end }}</span>
-        </div>
-        <div class="entry-content">
-          <h3 class="entry-title">
-            <ProseA
-              :href="job.url"
-              fancy
-              bold
-            >
-              {{ job.title }}
-              <span class="entry-org">
-                at {{ job.company }}
-              </span>
-            </ProseA>
-          </h3>
-          <ContentRenderer
-            class="entry-description"
-            :value="job"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
+<template lang="pug">
+section.jobs
+  h4.section-heading#work Experience
+  .entries
+    .entry(v-for="job, i in jobs" :key="i")
+      .entry-date
+        span {{ job.start }}
+        span  &mdash;
+        span {{ job.end }}
+      .entry-content
+        h3.entry-title
+          ProseA(:href="job.url" fancy bold)
+            | {{ job.title }}
+            span.entry-org  at {{ job.company }}
+        ContentRenderer.entry-description(:value="job")
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,6 @@
-<template>
-  <li class="prose-li">
-    <slot />
-  </li>
+<template lang="pug">
+li.prose-li
+  slot
 </template>
 
 <style lang="sass" scoped>
