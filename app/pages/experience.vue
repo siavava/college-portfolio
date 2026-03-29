@@ -26,7 +26,7 @@ PanelMulti
         :meta="`${entry.start} \u2014 ${entry.end}`"
         compact
         @select="selectItem(entry)"
-      ) {{ entry.title }} at {{ entry.company || entry.school }}
+      ) {{ entry.title }} at {{ orgName(entry) }}
 
   transition(name="panel" mode="out-in")
     PanelDetail(
@@ -41,7 +41,7 @@ PanelMulti
           :href="selectedItem.url"
           target="_blank"
           rel="noopener noreferrer"
-        ) {{ selectedItem.company || selectedItem.school }}
+        ) {{ orgName(selectedItem) }}
         span.detail-location(v-if="selectedItem.location") &middot; {{ selectedItem.location }}
       .detail-body
         ContentRenderer(:value="selectedItem")
@@ -70,6 +70,9 @@ const groupEntries = computed(() => {
   if (activeGroup.value === 'education') return education.value
   return []
 })
+
+const orgName = (entry: { company?: string; school?: string }) =>
+  entry.company || entry.school || ''
 </script>
 
 <style lang="sass" scoped>

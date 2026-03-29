@@ -18,8 +18,8 @@ defineProps<{
 }>()
 
 const heading = 1
-const { anchorLinks } = useRuntimeConfig().public.content
-const generate = anchorLinks?.depth >= heading
+const contentConfig = useRuntimeConfig().public.content as { anchorLinks?: { depth: number } }
+const generate = (contentConfig.anchorLinks?.depth ?? 0) >= heading
 </script>
 
 <style lang="sass" scoped>
