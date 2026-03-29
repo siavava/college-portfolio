@@ -4,7 +4,7 @@ title: Software Engineer
 company: Instagram
 location: Menlo Park, CA
 start: 07/24
-end: rtfn
+end: ??
 url: 'https://engineering.fb.com/'
 category: 'jobs-info'
 navigation: false

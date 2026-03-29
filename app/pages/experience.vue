@@ -10,7 +10,7 @@ PanelMulti
       @select="selectGroup('education')"
     ) {{ educationLabel }}
 
-  transition(name="panel" mode="out-in")
+  Transition(name="panel" mode="out-in")
     PanelMenu(
       v-if="activeGroup"
       :key="activeGroup"
@@ -29,7 +29,7 @@ PanelMulti
         @select="selectItem(entry)"
       ) {{ entry.title }} at {{ orgName(entry) }}
 
-  transition(name="panel")
+  Transition(name="panel" mode="out-in")
     PanelDetail(
       v-if="selectedItem"
       :key="selectedItem.path"
@@ -81,8 +81,6 @@ const orgName = (entry: { company?: string; school?: string }) =>
 
 .detail-org
   margin-bottom: 1.5em
-  padding-bottom: 1em
-  border-bottom: 0.5px solid var(--border-color)
 
 .org-link
   font-family: typography.font("serif"), serif

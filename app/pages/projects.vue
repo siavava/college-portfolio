@@ -13,7 +13,7 @@ PanelMulti
       @select="selectGroup(category)"
     ) {{ toTitleCase(category) }}
 
-  transition(name="panel" mode="out-in")
+  Transition(name="panel" mode="out-in")
     PanelMenu(
       v-if="activeGroup"
       :key="activeGroup"
@@ -32,7 +32,7 @@ PanelMulti
         @select="selectItem(project)"
       ) {{ project.title }}
 
-  transition(name="panel")
+  Transition(name="panel" mode="out-in")
     PanelDetail(
       v-if="selectedItem"
       :key="selectedItem.path"
@@ -125,8 +125,6 @@ const toTitleCase = (str: string) => {
 
 .detail-title
   margin-bottom: 1.5em
-  padding-bottom: 1em
-  border-bottom: 0.5px solid var(--border-color)
 
 .detail-body
   margin-bottom: 2em
