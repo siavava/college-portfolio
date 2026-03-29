@@ -14,9 +14,11 @@ provide(PANEL_LAYOUT_KEY, context)
 .multi-panel
   display: flex
   min-height: 100%
+  width: 100%
+  max-width: 100%
+  overflow: hidden
 
 .panel
-  flex-shrink: 0
   overflow-y: auto
 
 .panel-border

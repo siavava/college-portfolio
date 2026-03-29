@@ -84,10 +84,9 @@ onMounted(() => { mounted.value = true })
 
 const panelStyle = computed(() => {
   const style: Record<string, string> = {}
-  if (resizable && mounted.value) {
+  if (resizable && mounted.value && !isStacked.value) {
     style.width = `${resizable.width.value}px`
   }
-  // Each depth level gets a higher z-index so deeper panels paint on top
   style['z-index'] = String(10 + props.depth)
   return style
 })
@@ -98,9 +97,11 @@ const panelStyle = computed(() => {
 
 .panel-menu
   width: 280px
+  max-width: 100%
   padding: 40px 32px
   position: relative
   background: var(--background)
+  overflow: hidden
 
   &.stacked
     width: 100% !important
@@ -108,6 +109,7 @@ const panelStyle = computed(() => {
 
   @media screen and (max-width: 768px)
     width: 100% !important
+    flex-shrink: 1
     padding: 40px 20px
 
 .panel-menu-close
@@ -131,7 +133,7 @@ const panelStyle = computed(() => {
 .resize-handle
   position: absolute
   top: 0
-  right: -3px
+  right: 0
   width: 6px
   height: 100%
   cursor: col-resize
