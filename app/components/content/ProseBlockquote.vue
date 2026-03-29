@@ -37,7 +37,7 @@ defineProps<{
   position: relative
   margin: 2rem 0 0 0
   padding-left: 1em
-  border-left: 0.5px solid // var(--border-color)
+  border-left: 4px solid var(--border-color)
 
   &:not(:last-child)
     margin-bottom: 1.5rem

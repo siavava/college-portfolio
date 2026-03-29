@@ -59,6 +59,8 @@ export default defineNuxtConfig({
     "@nuxt/content",
     // "@nuxt/ui",
     "@nuxt/image",
+    "@nuxt/icon",
+    "@vueuse/nuxt",
     "@nuxt/devtools",
     "@nuxtjs/color-mode",
     ["@nuxtjs/robots", {
@@ -109,7 +111,6 @@ export default defineNuxtConfig({
 
   components: {
     dirs: [
-      "~/components/icons",
       "~/components/molecules",
       "~/components",
     ],

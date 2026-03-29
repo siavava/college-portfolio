@@ -1,5 +1,12 @@
 <template lang="pug">
-.panel.panel-menu.panel-border(:class="{ overlay }")
+.panel.panel-menu.panel-border.no-select(
+  :class="{ overlay, dragging: resizable?.isDragging.value }"
+  :style="panelStyle"
+)
+  .resize-handle(
+    v-if="resizable"
+    @pointerdown="resizable.onPointerDown"
+  )
   .panel-menu-header
     span.panel-menu-label(v-if="label") {{ label }}
     h2.panel-menu-title {{ title }}
@@ -8,12 +15,25 @@
 </template>
 
 <script lang="ts" setup>
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   title: string
   label?: string
   overlay?: boolean
+  storageKey?: string
 }>(), {
   overlay: false,
+})
+
+const resizable = props.storageKey
+  ? useResizablePanel({ key: props.storageKey })
+  : null
+
+const mounted = ref(false)
+onMounted(() => { mounted.value = true })
+
+const panelStyle = computed(() => {
+  if (!resizable || !mounted.value) return undefined
+  return { width: `${resizable.width.value}px` }
 })
 </script>
 
@@ -23,6 +43,7 @@ withDefaults(defineProps<{
 .panel-menu
   width: 280px
   padding: 40px 32px
+  position: relative
 
   &.overlay
     @media screen and (max-width: 1100px)
@@ -39,8 +60,28 @@ withDefaults(defineProps<{
       top: 60px
 
   @media screen and (max-width: 768px)
-    width: 100%
+    width: 100% !important
     padding: 40px 20px
+
+.resize-handle
+  position: absolute
+  top: 0
+  right: -3px
+  width: 6px
+  height: 100%
+  cursor: col-resize
+  z-index: 10
+  opacity: 0
+  transition: opacity 0.15s ease
+  border-right: 2px dotted var(--foreground)
+
+  .panel-menu:hover &,
+  .panel-menu.dragging &
+    opacity: 0.3
+
+  &:hover,
+  .panel-menu.dragging &
+    opacity: 0.5
 
 .panel-menu-header
   margin-bottom: 2em

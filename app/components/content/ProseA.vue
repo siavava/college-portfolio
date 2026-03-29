@@ -87,18 +87,26 @@ span(:class="{'link-wrapper': true, 'fancy': fancy, 'subtle': subtle}")
   pointer-events: all
 
   transition: background 0.3s ease-out
-  border-bottom: 1px dotted var(--border-color)
+  // border-bottom: 1px dashed var(--dark-foreground)
+  text-decoration: underline dashed
+  text-underline-offset: 5px
+  text-decoration-thickness: 1px
+  text-decoration-color: var(--dark-foreground)
 
   &:hover
     cursor: pointer
     background: var(--primary-highlight)
+    text-decoration-color: var(--foreground)
 
   &.subtle
     border-bottom: none
     font-size: inherit
 
+    text-decoration: none
+
     &:hover
       background: none
+      text-decoration: none
 
     .link
       color: var(--lightest-foreground)

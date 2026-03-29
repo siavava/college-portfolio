@@ -2,7 +2,7 @@
 #root
   aside.sidebar
     .ribbon
-    nav.sidebar-nav
+    nav.sidebar-nav.no-select
       NuxtLink.nav-item(to="/" :class="{ active: route.path === '/' }") {{ nav.about }}
       NuxtLink.nav-item(to="/projects" :class="{ active: route.path.startsWith('/projects') }") {{ nav.projects }}
       NuxtLink.nav-item(to="/experience" :class="{ active: route.path === '/experience' }") {{ nav.experience }}

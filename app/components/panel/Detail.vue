@@ -1,6 +1,6 @@
 <template lang="pug">
 .panel.panel-detail
-  button.close-btn(@click="$emit('close')") &times;
+  button.close-btn.no-select(@click="$emit('close')") &times;
   slot
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle")
+  PanelMenu(:title="title" :label="subtitle" storageKey="panel:projects-nav")
     PanelEntry(
       v-if="featuredProjects.length"
       :active="activeGroup === '__featured__'"
@@ -20,6 +20,7 @@ PanelMulti
       :title="activeGroup === '__featured__' ? featured : toTitleCase(activeGroup)"
       :label="projectCount(groupProjects.length)"
       overlay
+      storageKey="panel:projects-list"
     )
       PanelEntry(
         v-for="project in groupProjects"
@@ -49,13 +50,17 @@ PanelMulti
             :href="selectedItem.repo"
             target="_blank"
             rel="noopener noreferrer"
-          ) GitHub &#8599;
+          )
+            | GitHub
+            Icon.link-arrow(name="lucide:arrow-up-right")
           a.detail-link(
             v-if="selectedItem.url"
             :href="selectedItem.url"
             target="_blank"
             rel="noopener noreferrer"
-          ) Visit &#8599;
+          )
+            | Visit
+            Icon.link-arrow(name="lucide:arrow-up-right")
 </template>
 
 <script lang="ts" setup>
@@ -132,16 +137,16 @@ const toTitleCase = (str: string) => {
 .tech-list
   display: flex
   flex-wrap: wrap
-  gap: 0.5em
+  gap: 1em
   margin-bottom: 1em
 
 .tech-tag
   font-family: typography.font("sans-serif"), sans-serif
   font-size: 10px
+  text-transform: uppercase
+  letter-spacing: 0.08em
   color: var(--foreground)
-  border: 0.5px solid var(--border-color)
-  padding: 3px 10px
-  border-radius: 20px
+  opacity: 0.5
 
 .detail-links
   display: flex
@@ -155,7 +160,19 @@ const toTitleCase = (str: string) => {
   text-underline-offset: 3px
   text-decoration-color: var(--foreground)
   transition: text-decoration-color 0.2s ease
+  display: inline-flex
+  align-items: center
+  gap: 0.2em
 
   &:hover
     text-decoration-color: var(--lightest-foreground)
+
+.link-arrow
+  width: 14px
+  height: 14px
+  flex-shrink: 0
+  transition: transform 0.2s ease
+
+  .detail-link:hover &
+    transform: translate(2px, -2px)
 </style>

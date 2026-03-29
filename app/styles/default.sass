@@ -32,6 +32,14 @@ html
 ::selection
   background: var(--primary-highlight)
 
+:is(.no-select) ::selection
+  text-decoration: none
+
+.no-select, .no-select::before, .no-select::after
+  -webkit-tap-highlight-color: transparent
+  -webkit-touch-callout: none
+  user-select: none
+
 /* Provide basic, default focus styles.*/
 :focus
   outline: 2px dashed var(--primary-highlight)

@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle")
+  PanelMenu(:title="title" :label="subtitle" storageKey="panel:experience-nav")
     PanelEntry(
       :active="activeGroup === 'work'"
       @select="selectGroup('work')"
@@ -17,6 +17,7 @@ PanelMulti
       :title="activeGroup === 'work' ? workLabel : educationLabel"
       :label="entryCount(groupEntries.length)"
       overlay
+      storageKey="panel:experience-list"
     )
       PanelEntry(
         v-for="entry in groupEntries"
@@ -94,5 +95,5 @@ const groupEntries = computed(() => {
   font-family: typography.font("serif"), serif
   font-size: typography.font-size("s")
   color: var(--foreground)
-  margin-left: 0.5em
+  margin-left: 0.25em
 </style>

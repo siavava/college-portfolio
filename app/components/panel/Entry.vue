@@ -1,10 +1,10 @@
 <template lang="pug">
-.panel-entry(:class="{ active, compact }" @click="$emit('select')")
+.panel-entry.no-select(:class="{ active, compact }" @click="$emit('select')")
   .panel-entry-row
     span.panel-entry-indicator(v-if="active") &rsaquo;
     span.panel-entry-title
       slot
-      span.panel-entry-arrow &#8599;
+      Icon.panel-entry-arrow(name="lucide:arrow-up-right")
   .panel-entry-meta(v-if="meta") {{ meta }}
 </template>
 
@@ -61,9 +61,16 @@ defineEmits<{
     font-size: typography.font-size("s")
 
 .panel-entry-arrow
-  font-size: 11px
+  width: 14px
+  height: 14px
   color: var(--foreground)
-  opacity: 0.4
+  opacity: 0.3
+  flex-shrink: 0
+  transition: transform 0.2s ease, opacity 0.2s ease
+
+  .panel-entry:hover &
+    transform: translate(2px, -2px)
+    opacity: 0.6
 
 .panel-entry-meta
   font-family: typography.font("sans-serif"), sans-serif
