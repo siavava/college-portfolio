@@ -85,7 +85,7 @@ onMounted(() => { mounted.value = true })
 const panelStyle = computed(() => {
   const style: Record<string, string> = {}
   if (resizable && mounted.value && !isStacked.value) {
-    style.width = `${resizable.width.value}px`
+    style.width = `min(${resizable.width.value}px, 100%)`
   }
   style['z-index'] = String(10 + props.depth)
   return style
@@ -101,7 +101,8 @@ const panelStyle = computed(() => {
   padding: 40px 32px
   position: relative
   background: var(--background)
-  overflow: hidden
+  overflow-x: hidden
+  overflow-y: auto
 
   &.stacked
     width: 100% !important
@@ -115,7 +116,7 @@ const panelStyle = computed(() => {
 .panel-menu-close
   position: absolute
   top: 40px
-  right: 20px
+  right: 30px
   background: none
   border: none
   font-size: 22px
