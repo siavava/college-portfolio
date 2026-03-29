@@ -1,4 +1,4 @@
-# Personal Website
+# Personal Website[^1]
 
 Built with [Nuxt 4](https://nuxt.com), [Vue 3](https://vuejs.org),
 [Pug](https://pugjs.org), [Sass](https://sass-lang.com),
@@ -50,7 +50,7 @@ bun run build
 Preview the production build locally:
 
 ```bash
-bun run preview
+bun preview
 ```
 
 Generate static routes (recommended):
@@ -62,3 +62,6 @@ bun generate
 ---
 
 Checkout the [Nuxt docs](https://nuxt.com/docs) for more information.
+
+[^1]: Feel free to clone, re-purpose, and/or re-use this website
+  as long as credit is given.
