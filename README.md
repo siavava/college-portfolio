@@ -64,4 +64,4 @@ bun generate
 Checkout the [Nuxt docs](https://nuxt.com/docs) for more information.
 
 [^1]: Feel free to clone, re-purpose, and/or re-use this website
-  as long as credit is given.
+  as long as credited.

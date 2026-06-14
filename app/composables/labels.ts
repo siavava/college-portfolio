@@ -13,6 +13,8 @@ const _labels = {
     experience: "Experience",
     writing: "Writing",
     writingUrl: "https://amittai.space",
+    notes: "Notes",
+    notesUrl: "https://notes.amittai.studio",
   },
 
   // --- Projects ---

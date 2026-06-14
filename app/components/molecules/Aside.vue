@@ -6,6 +6,7 @@ aside.sidebar
     NuxtLink.nav-item(to="/projects" :class="{ active: route.path.startsWith('/projects') }") {{ nav.projects }}
     NuxtLink.nav-item(to="/experience" :class="{ active: route.path === '/experience' }") {{ nav.experience }}
     NuxtLink.nav-item(:to="nav.writingUrl" target="_blank" rel="noopener noreferrer") {{ nav.writing }}
+    NuxtLink.nav-item(:to="nav.notesUrl" target="_blank" rel="noopener noreferrer") {{ nav.notes }}
 </template>
 
 <script lang="ts" setup>
