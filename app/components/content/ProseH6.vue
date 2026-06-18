@@ -1,6 +1,6 @@
 <template lang="pug">
 .prose-h2-container
-  NuxtLink.prose-title-wrapper(v-if="generate && id" :to="`#${id}`")
+  NuxtLink.prose-title-wrapper(v-if="generate && (id !== '')" :to="`#${id}`")
     h2.prose-h2(:id="id")
       slot
   .prose-title-wrapper(v-else)

@@ -1,5 +1,5 @@
 <template lang="pug">
-ProseA.prose-title-wrapper(v-if="generate && id" :to="`#${id}`" :underline="false")
+ProseA.prose-title-wrapper(v-if="generate && (id !== '')" :to="`#${id}`" :underline="false")
   h1.prose-h1(:id="id")
     slot
 div.prose-title-wrapper(v-else)
