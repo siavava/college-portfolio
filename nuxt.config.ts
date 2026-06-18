@@ -62,6 +62,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@vueuse/nuxt",
     "@nuxt/devtools",
+    "@nuxt/eslint",
     "@nuxtjs/color-mode",
     ["@nuxtjs/robots", {
       UserAgent: "*",

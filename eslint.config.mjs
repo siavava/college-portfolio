@@ -1,8 +1,8 @@
 // @ts-check
 
-import withNuxt from "./.nuxt/eslint.config.mjs"
 import stylistic from "@stylistic/eslint-plugin"
-// import parserTs from "@typescript-eslint/parser"
+import vuePug from "eslint-plugin-vue-pug"
+import withNuxt from "./.nuxt/eslint.config.mjs"
 
 export default withNuxt({
   // @ts-ignore
@@ -71,5 +71,19 @@ export default withNuxt({
     rules: {
       // nuxt
       "nuxt/prefer-import-meta": "error",
+    },
+  })
+  // @ts-expect-error: vue-pug typing issue
+  .append(vuePug.configs["flat/recommended"])
+  .append({
+    // sort imports
+    rules: {
+      "sort-imports": ["error", {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        "allowSeparatedGroups": true,
+      }],
     },
   })

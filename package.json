@@ -9,7 +9,7 @@
     "preview": "nuxi preview",
     "prepare": "husky install",
     "postinstall": "nuxt prepare",
-    "lint": "echo 'Linting disabled for now' && exit 0"
+    "lint": "eslint . --fix"
   },
   "lint-staged": {
     "*.{ts,vue}": [
@@ -20,17 +20,16 @@
     "@nuxt/content": "3.7.1",
     "@nuxt/devtools": "^3.2.4",
     "@nuxt/eslint": "1.3.0",
-    "@nuxt/eslint-config": "^1.15.2",
     "@nuxt/icon": "^2.2.1",
     "@nuxt/image": "2.0.0",
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/color-mode": "^4.0.0",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@stylistic/eslint-plugin": "5.4.0",
     "@typescript-eslint/parser": "^8.57.2",
     "@vue/language-plugin-pug": "^3.2.6",
     "eslint": "^9.39.4",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-vue": "^10.8.0",
+    "eslint-plugin-vue-pug": "1.0.0-alpha.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "nuxt": "^4.4.2",
