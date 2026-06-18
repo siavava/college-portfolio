@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle" storageKey="panel:projects-nav" :depth="0")
+  PanelMenu(:title="title" :label="subtitle" storage-key="panel:projects-nav" :depth="0")
     PanelEntry(
       v-if="featuredProjects.length"
       :active="activeGroup === '__featured__'"
@@ -20,7 +20,7 @@ PanelMulti
       :title="activeGroup === '__featured__' ? featured : toTitleCase(activeGroup)"
       :label="projectCount(groupProjects.length)"
       :depth="1"
-      storageKey="panel:projects-list"
+      storage-key="panel:projects-list"
       @back="selectGroup(activeGroup)"
     )
       PanelEntry(
@@ -68,7 +68,7 @@ PanelMulti
 const { title, subtitle, featured, projectCount } = labels().projects
 
 const { data } = await useAsyncData(
-  'all-projects',
+  "all-projects",
   () => queryCollection("projects").order("date", "DESC").all(),
 )
 
@@ -76,7 +76,7 @@ const projects = computed(() => data.value || [])
 const featuredProjects = computed(() => projects.value.filter(p => p.featured))
 
 const categorized = computed(() => {
-  const map = new Map<string, any[]>()
+  const map = new Map<string, typeof projects.value>()
   projects.value.forEach((project) => {
     const cat = project.tag || "misc"
     if (map.has(cat)) {
@@ -100,14 +100,14 @@ const { activeGroup, selectedItem, selectGroup, selectItem } = usePanelSelection
 
 const groupProjects = computed(() => {
   if (!activeGroup.value) return []
-  if (activeGroup.value === '__featured__') return featuredProjects.value
+  if (activeGroup.value === "__featured__") return featuredProjects.value
   return categorized.value.get(activeGroup.value) || []
 })
 
 const formatDate = (date: string) => {
   const d = new Date(date)
-  const month = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
+  const month = String(d.getMonth() + 1).padStart(2, "0")
+  const day = String(d.getDate()).padStart(2, "0")
   const year = d.getFullYear()
   return `${month}-${day}-${year}`
 }
@@ -115,7 +115,7 @@ const formatDate = (date: string) => {
 const toTitleCase = (str: string) => {
   return str.replace(
     /(^|\b(?!(and?|at?|the|for|to|but|by)\b))\w+/g,
-    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
   )
 }
 </script>

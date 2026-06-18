@@ -9,17 +9,11 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
-import { useRuntimeConfig } from "#imports"
-
 defineProps<{
   id?: string
 }>()
 
-const heading = 1
-// const { anchorLinks } = useRuntimeConfig().public.content
-const generate = false // anchorLinks?.depth >= heading
+const generate = false
 </script>
 
 <style lang="sass" scoped>

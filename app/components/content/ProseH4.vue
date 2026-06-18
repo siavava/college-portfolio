@@ -9,8 +9,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import { useRuntimeConfig } from "#imports"
 
 defineProps<{

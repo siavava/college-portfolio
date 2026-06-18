@@ -1,5 +1,5 @@
 <template lang="pug">
-ProseA.prose-title-wrapper(v-if="generate && id" :to="`#${id}`" :underline="false")
+ProseA.prose-title-wrapper(v-if="generate && (id !== '')" :to="`#${id}`" :underline="false")
   h1(:id="id" :class="{ 'prose-h2': true, 'bold': bold }")
     slot
 div.prose-title-wrapper(v-else)
@@ -9,8 +9,6 @@ div.prose-title-wrapper(v-else)
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import { useRuntimeConfig } from "#imports"
 
 defineProps({
@@ -25,9 +23,8 @@ defineProps({
 })
 // defineProps<{ id: string }>()
 const heading = 1
-// @ts-ignore
-const { anchorLinks } = useRuntimeConfig().public.content
-const generate = anchorLinks?.depth >= heading
+const contentConfig = useRuntimeConfig().public.content as { anchorLinks?: { depth: number } }
+const generate = (contentConfig.anchorLinks?.depth ?? 0) >= heading
 </script>
 
 <style lang="sass" scoped>

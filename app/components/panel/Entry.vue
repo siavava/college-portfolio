@@ -15,6 +15,7 @@ withDefaults(defineProps<{
   compact?: boolean
 }>(), {
   active: false,
+  meta: undefined,
   compact: false,
 })
 

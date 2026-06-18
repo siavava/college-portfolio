@@ -8,8 +8,6 @@ div.prose-title-wrapper(v-else)
 </template>
 
 <script setup lang="ts">
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import { useRuntimeConfig } from "#imports"
 
 defineProps({
@@ -24,9 +22,8 @@ defineProps({
 })
 // defineProps<{ id: string }>()
 const heading = 1
-// @ts-ignore
-const { anchorLinks } = useRuntimeConfig().public.content
-const generate = anchorLinks?.depth >= heading
+const contentConfig = useRuntimeConfig().public.content as { anchorLinks?: { depth: number } }
+const generate = (contentConfig.anchorLinks?.depth ?? 0) >= heading
 </script>
 
 <style lang="sass" scoped>

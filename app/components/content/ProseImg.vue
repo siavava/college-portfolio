@@ -12,8 +12,6 @@ figure.prose-img-wrapper
 </template>
 
 <script setup lang="ts">
-import { withBase } from "ufo"
-
 const props = defineProps({
   src: {
     type: String,

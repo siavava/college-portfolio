@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<{
   depth?: number
   storageKey?: string
 }>(), {
+  label: undefined,
   depth: 0,
+  storageKey: undefined,
 })
 
 defineEmits<{
@@ -75,7 +77,7 @@ const showClose = computed(() => {
   // Show close button when parent is hidden (collapsed) or in stacked mode
   if (isStacked.value) return true
   return context.panels.value.some(
-    p => p.depth < props.depth && !context.visibleIds.value.has(p.id)
+    p => p.depth < props.depth && !context.visibleIds.value.has(p.id),
   )
 })
 
@@ -87,7 +89,7 @@ const panelStyle = computed(() => {
   if (resizable && mounted.value && !isStacked.value) {
     style.width = `min(${resizable.width.value}px, 100%)`
   }
-  style['z-index'] = String(10 + props.depth)
+  style["z-index"] = String(10 + props.depth)
   return style
 })
 </script>

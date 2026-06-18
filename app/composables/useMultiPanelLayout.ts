@@ -20,9 +20,8 @@ export interface MultiPanelContext {
   updateWidth: (id: string, width: number) => void
 }
 
-export const PANEL_LAYOUT_KEY = Symbol('panel-layout') as InjectionKey<MultiPanelContext>
+export const PANEL_LAYOUT_KEY = Symbol("panel-layout") as InjectionKey<MultiPanelContext>
 
-const SIDEBAR_WIDTH = 256
 const TWO_PANELS_MIN = 1400
 const ONE_PANEL_MIN = 1080
 
@@ -37,11 +36,11 @@ export function useMultiPanelLayout() {
 
     onMounted(() => {
       update()
-      window.addEventListener('resize', update)
+      window.addEventListener("resize", update)
     })
 
     onUnmounted(() => {
-      window.removeEventListener('resize', update)
+      window.removeEventListener("resize", update)
     })
   }
 
