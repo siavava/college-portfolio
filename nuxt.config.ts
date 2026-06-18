@@ -134,5 +134,16 @@ export default defineNuxtConfig({
     dir: "static",
   },
 
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "@vercel/analytics",
+        "@vercel/speed-insights/nuxt",
+      ],
+    },
+  },
+
   compatibilityDate: "2025-06-06",
 })
