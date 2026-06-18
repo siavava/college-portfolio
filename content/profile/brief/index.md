@@ -13,4 +13,5 @@ navigation: false
 
 [_See also:_ [GitHub](https://github.com/siavava){subtle}
 [LinkedIn](https://linkedin.com/in/siavava){subtle}
+[Notes](https://notes.amittai.studio){subtle}
 [Blog](https://amittai.space){subtle}]{.see-also}
