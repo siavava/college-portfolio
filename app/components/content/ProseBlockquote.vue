@@ -22,7 +22,7 @@ defineProps<{
       name: string
       link: string
     }
-  },
+  }
   link?: string
   tags?: string[]
 }>()

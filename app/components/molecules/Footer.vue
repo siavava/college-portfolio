@@ -11,7 +11,7 @@ const colorMode = useColorMode()
 const { footer } = labels()
 
 const toggleColorMode = () => {
-  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark"
 }
 </script>
 

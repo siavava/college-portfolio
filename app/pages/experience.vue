@@ -1,6 +1,6 @@
 <template lang="pug">
 PanelMulti
-  PanelMenu(:title="title" :label="subtitle" storageKey="panel:experience-nav" :depth="0")
+  PanelMenu(:title="title" :label="subtitle" storage-key="panel:experience-nav" :depth="0")
     PanelEntry(
       :active="activeGroup === 'work'"
       @select="selectGroup('work')"
@@ -17,7 +17,7 @@ PanelMulti
       :title="activeGroup === 'work' ? workLabel : educationLabel"
       :label="entryCount(groupEntries.length)"
       :depth="1"
-      storageKey="panel:experience-list"
+      storage-key="panel:experience-list"
       @back="selectGroup(activeGroup)"
     )
       PanelEntry(
@@ -52,12 +52,12 @@ PanelMulti
 const { title, subtitle, work: workLabel, education: educationLabel, entryCount } = labels().experience
 
 const { data: jobsData } = await useAsyncData(
-  'all-jobs',
+  "all-jobs",
   () => queryCollection("jobs").order("date", "DESC").all(),
 )
 
 const { data: educationData } = await useAsyncData(
-  'all-education',
+  "all-education",
   () => queryCollection("education").order("date", "DESC").all(),
 )
 
@@ -67,13 +67,13 @@ const education = computed(() => educationData.value || [])
 const { activeGroup, selectedItem, selectGroup, selectItem } = usePanelSelection()
 
 const groupEntries = computed(() => {
-  if (activeGroup.value === 'work') return jobs.value
-  if (activeGroup.value === 'education') return education.value
+  if (activeGroup.value === "work") return jobs.value
+  if (activeGroup.value === "education") return education.value
   return []
 })
 
-const orgName = (entry: { company?: string; school?: string }) =>
-  entry.company || entry.school || ''
+const orgName = (entry: { company?: string, school?: string }) =>
+  entry.company || entry.school || ""
 </script>
 
 <style lang="sass" scoped>

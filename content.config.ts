@@ -1,4 +1,4 @@
-import { defineCollection, z } from "@nuxt/content";
+import { defineCollection, z } from "@nuxt/content"
 
 export const collections = {
   pages: defineCollection({
@@ -35,7 +35,7 @@ export const collections = {
       name: z.string(),
       pronunciation: z.string().optional(),
       partOfSpeech: z.string().optional(),
-    })
+    }),
   }),
 
   contact: defineCollection({
@@ -48,9 +48,9 @@ export const collections = {
           name: z.string(),
           url: z.string(),
           username: z.string(),
-        })
-      )
-    })
+        }),
+      ),
+    }),
   }),
 
   projects: defineCollection({
@@ -65,7 +65,7 @@ export const collections = {
       featured: z.boolean().optional(),
       tag: z.string(),
       url: z.string().optional(),
-    })
+    }),
   }),
 
   education: defineCollection({
@@ -79,6 +79,6 @@ export const collections = {
       start: z.string(),
       end: z.string(),
       url: z.string(),
-    })
-  })
+    }),
+  }),
 }

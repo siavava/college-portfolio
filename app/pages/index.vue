@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 const { data: profile } = await useAsyncData(
-  'profile-about',
+  "profile-about",
   () => queryCollection("profile").first(),
 )
 </script>

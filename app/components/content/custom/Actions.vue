@@ -1,6 +1,6 @@
 <template lang="pug">
 .actions-container
-  button#color-mode-button.color-mode-button(@click="toggleColorMode" aria-label="Toggle color mode")
+  button#color-mode-button.color-mode-button(aria-label="Toggle color mode" @click="toggleColorMode")
     .icon
       svg(viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg")
         defs
@@ -27,7 +27,7 @@ const colorMode = useColorMode()
 
 const colorModes = [
   "light",
-  "dark"
+  "dark",
 ]
 
 const toggleColorMode = () => {

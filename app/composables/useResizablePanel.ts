@@ -22,8 +22,8 @@ export function useResizablePanel(options: UseResizablePanelOptions) {
     const startX = e.clientX
     const startWidth = width.value
 
-    document.body.style.userSelect = 'none'
-    document.body.style.cursor = 'col-resize'
+    document.body.style.userSelect = "none"
+    document.body.style.cursor = "col-resize"
 
     const onPointerMove = (moveEvent: PointerEvent) => {
       const delta = moveEvent.clientX - startX
@@ -32,14 +32,14 @@ export function useResizablePanel(options: UseResizablePanelOptions) {
 
     const onPointerUp = () => {
       isDragging.value = false
-      document.body.style.userSelect = ''
-      document.body.style.cursor = ''
-      document.removeEventListener('pointermove', onPointerMove)
-      document.removeEventListener('pointerup', onPointerUp)
+      document.body.style.userSelect = ""
+      document.body.style.cursor = ""
+      document.removeEventListener("pointermove", onPointerMove)
+      document.removeEventListener("pointerup", onPointerUp)
     }
 
-    document.addEventListener('pointermove', onPointerMove)
-    document.addEventListener('pointerup', onPointerUp)
+    document.addEventListener("pointermove", onPointerMove)
+    document.addEventListener("pointerup", onPointerUp)
   }
 
   return { width, isDragging, onPointerDown }

@@ -21,22 +21,22 @@ onMounted(() => {
   resizeCanvas()
 
   let gradientPosition = new Date().getTime() * 0.0001
-  let gradientSpeed = 0.001
+  const gradientSpeed = 0.001
 
   const draw = () => {
-    const width = canvas.width;
-    const height = canvas.height;
+    const width = canvas.width
+    const height = canvas.height
 
-    gradientPosition += gradientSpeed;
+    gradientPosition += gradientSpeed
 
-    const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, `hsl(${Math.sin(gradientPosition) * 360}, 20%, 50%)`);
-    gradient.addColorStop(1, `hsl(${Math.cos(gradientPosition) * 360}, 20%, 50%)`);
+    const gradient = ctx.createLinearGradient(0, 0, width, height)
+    gradient.addColorStop(0, `hsl(${Math.sin(gradientPosition) * 360}, 20%, 50%)`)
+    gradient.addColorStop(1, `hsl(${Math.cos(gradientPosition) * 360}, 20%, 50%)`)
 
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, width, height)
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(draw)
   }
 
   draw()
